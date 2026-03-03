@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 01:21+0200\n"
+"POT-Creation-Date: 2026-03-03 19:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,7 @@ msgstr "Kino Svit"
 msgid "Перейти до корзини"
 msgstr "Go to cart"
 
-#: cinema/templates/cinema/base.html:40 cinema/templates/cinema/base.html:102
+#: cinema/templates/cinema/base.html:40 cinema/templates/cinema/base.html:103
 msgid "Кошик"
 msgstr "Cart"
 
@@ -102,12 +102,12 @@ msgstr "Thank you!"
 msgid "Для завершення покупки ми зв’яжемося з Вами!"
 msgstr "We'll contact you to complete the purchase."
 
-#: cinema/templates/cinema/base.html:112
+#: cinema/templates/cinema/base.html:113
 #, python-format
 msgid "Разом: <strong>%(total)s</strong>"
 msgstr "Subtotal: <strong>%(total)s</strong>"
 
-#: cinema/templates/cinema/base.html:114
+#: cinema/templates/cinema/base.html:115
 msgid "Оформити замовлення"
 msgstr "Proceed to checkout"
 
@@ -142,3 +142,11 @@ msgstr "Production"
 #: cinema/templates/cinema/product_detail.html:53
 msgid "Країна"
 msgstr "Country"
+
+#: cinema/templates/cinema/products.html:31
+msgid "Поки що товарів немає"
+msgstr "No products yet"
+
+#: cinema/templates/cinema/products.html:32
+msgid "Перевірте пізніше або перегляньте інші категорії"
+msgstr "Check back later or explore other categories"
