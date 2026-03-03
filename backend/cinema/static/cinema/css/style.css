@@ -311,7 +311,7 @@ h4 {
   top: 0; left: 0; right: 0; bottom: 0; /* покриває весь екран */
   background-color: rgba(0, 0, 0, 0.7); /* затемнений фон */
   z-index: 1000; /* щоб була поверх всього */
-  display: flex; /* для центрування контенту */
+  /* display встановлюється скриптом при відкритті */
   justify-content: center;
   align-items: center;
 }
@@ -337,6 +337,22 @@ h4 {
   cursor: pointer;
   z-index: 1010;
   transition: transform 0.2s ease;
+}
+
+/* Повідомлення про помилку всередині відеомодалки */
+.video-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  background: rgba(0,0,0,0.8);
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  max-width: 80vw;
+  text-align: center;
+  font-size: 1rem;
+  z-index: 1011;
 }
 
 #closeVideo:hover {
