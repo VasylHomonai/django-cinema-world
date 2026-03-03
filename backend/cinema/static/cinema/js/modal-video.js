@@ -17,10 +17,24 @@ function initVideoModal() {
   videoButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const videoURL = btn.dataset.videoId;                // Беремо повний URL з кнопки
-      const videoId = videoURL.split("v=")[1].split("&")[0];            // Отримуємо ID відео після ?v=
-      const embedURL = `https://www.youtube.com/embed/${videoId}?autoplay=1`; // Формуємо embed URL
-      videoFrame.src = embedURL;                           // Присвоюємо src iframe
-      videoModal.style.display = "flex";                  // Відкриваємо модалку
+      let videoId = null;
+      
+      // Парсимо video ID з різних форматів URL
+      if (videoURL.includes("v=")) {
+        videoId = videoURL.split("v=")[1].split("&")[0];
+      } else if (videoURL.includes("youtu.be/")) {
+        videoId = videoURL.split("youtu.be/")[1].split("?")[0];
+      } else {
+        videoId = videoURL; // Припускаємо, що це вже ID відео
+      }
+      
+      if (videoId) {
+        const embedURL = `https://www.youtube.com/embed/${videoId}?autoplay=1`; // Формуємо embed URL
+        videoFrame.src = embedURL;                           // Присвоюємо src iframe
+        videoModal.style.display = "flex";                  // Відкриваємо модалку
+      } else {
+        console.error("Не вдалося отримати ID відео з URL:", videoURL);
+      }
     });
   });
 

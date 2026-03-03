@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 01:21+0200\n"
+"POT-Creation-Date: 2026-03-03 16:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,3 +142,11 @@ msgstr "Production"
 #: cinema/templates/cinema/product_detail.html:53
 msgid "Країна"
 msgstr "Country"
+
+#: cinema/templates/cinema/products.html:31
+msgid "Поки що товарів немає"
+msgstr "No products yet"
+
+#: cinema/templates/cinema/products.html:32
+msgid "Перевірте пізніше або перегляньте інші категорії"
+msgstr "Check back later or explore other categories"

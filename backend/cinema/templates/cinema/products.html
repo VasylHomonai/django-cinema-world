@@ -6,25 +6,32 @@
 
 {% block content %}
 
-<div class="image-row">
-    {% for product in products %}
-        {% with product.translation as t %}
-            {% if t %}
-                <div class="image-item">
-                    <a href="{% url 'cinema:product-detail' product.slug|default:product.id %}">
-                        <img src="{{ t.image.url }}" alt="{{ t.name }}">
-                        <p class="caption title">{{ t.name }}</p>
-                    </a>
-                    <p class="caption year">{{ product.year }}</p>
+{% if products %}
+    <div class="image-row">
+        {% for product in products %}
+            {% with product.translation as t %}
+                {% if t %}
+                    <div class="image-item">
+                        <a href="{% url 'cinema:product-detail' product.slug|default:product.id %}">
+                            <img src="{{ t.image.url }}" alt="{{ t.name }}">
+                            <p class="caption title">{{ t.name }}</p>
+                        </a>
+                        <p class="caption year">{{ product.year }}</p>
 
-                    <div class="button-group">
-                        {% include "cinema/includes/product_actions.html" with product=product translation=t %}
+                        <div class="button-group">
+                            {% include "cinema/includes/product_actions.html" with product=product translation=t %}
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-        {% endwith %}
-    {% endfor %}
-</div>
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+{% else %}
+  <div class="empty-products">
+    <h2>{% trans "Поки що товарів немає" %}</h2>
+    <p>{% trans "Перевірте пізніше або перегляньте інші категорії" %}</p>
+  </div>
+{% endif %}
 
 <!-- ПАГІНАЦІЯ -->
 {% if is_paginated %}
