@@ -1,0 +1,144 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-03 01:21+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cinema/templates/cinema/base.html:8 cinema/templates/cinema/products.html:5
+msgid "КіноСвіт"
+msgstr "KinoSvit"
+
+#: cinema/templates/cinema/base.html:14
+msgid "Сайт про покупку фільмів"
+msgstr "An online store for purchasing movies"
+
+#: cinema/templates/cinema/base.html:15
+msgid "Відкрий для себе КіноСвіт. Дивись трейлери, купуй фільми)"
+msgstr "Explore KinoSvit. Watch trailers and buy movies."
+
+#: cinema/templates/cinema/base.html:21 cinema/templates/cinema/base.html:43
+msgid "Кіно Світ"
+msgstr "Kino Svit"
+
+#: cinema/templates/cinema/base.html:38
+msgid "Перейти до корзини"
+msgstr "Go to cart"
+
+#: cinema/templates/cinema/base.html:40 cinema/templates/cinema/base.html:102
+msgid "Кошик"
+msgstr "Cart"
+
+#: cinema/templates/cinema/base.html:44
+msgid "Купуй улюблений фільм на КіноСвіт!"
+msgstr "Buy your favorite movie at KinoSvit!"
+
+#: cinema/templates/cinema/base.html:55
+msgid "КіноСвіт. Всі права захищені."
+msgstr "KinoSvit. All rights reserved."
+
+#: cinema/templates/cinema/base.html:56
+msgid "КіноСвіт — твій провідник у світі фільмів та новинок в кіно."
+msgstr "KinoSvit — your gateway to movies and the latest cinema hits."
+
+#: cinema/templates/cinema/base.html:58
+msgid "Контакти:"
+msgstr "Contacts:"
+
+#: cinema/templates/cinema/base.html:58
+msgid "Тел."
+msgstr "Tel."
+
+#: cinema/templates/cinema/base.html:65
+msgid "Оформлення замовлення"
+msgstr "Checkout"
+
+#: cinema/templates/cinema/base.html:66
+msgid "Контактна інформація"
+msgstr "Contact information"
+
+#: cinema/templates/cinema/base.html:69
+msgid "Введіть ім’я"
+msgstr "Enter your name"
+
+#: cinema/templates/cinema/base.html:70
+msgid "Ім’я"
+msgstr "Name"
+
+#: cinema/templates/cinema/base.html:74
+msgid "тел: +380..."
+msgstr "tel: +380..."
+
+#: cinema/templates/cinema/base.html:75
+msgid "Телефон"
+msgstr "Phone"
+
+#: cinema/templates/cinema/base.html:76
+msgid "Формат: +380XXXXXXXXX"
+msgstr "Format: +380XXXXXXXXX"
+
+#: cinema/templates/cinema/base.html:78
+msgid "Підтвердити покупку"
+msgstr "Confirm Purchase"
+
+#: cinema/templates/cinema/base.html:87
+msgid "Дякуємо!"
+msgstr "Thank you!"
+
+#: cinema/templates/cinema/base.html:88
+msgid "Для завершення покупки ми зв’яжемося з Вами!"
+msgstr "We'll contact you to complete the purchase."
+
+#: cinema/templates/cinema/base.html:112
+#, python-format
+msgid "Разом: <strong>%(total)s</strong>"
+msgstr "Subtotal: <strong>%(total)s</strong>"
+
+#: cinema/templates/cinema/base.html:114
+msgid "Оформити замовлення"
+msgstr "Proceed to checkout"
+
+#: cinema/templates/cinema/includes/product_actions.html:12
+msgid "Переглянути трейлер"
+msgstr "Watch the trailer"
+
+#: cinema/templates/cinema/includes/product_actions.html:26
+msgid "Купити"
+msgstr "Add to cart"
+
+#: cinema/templates/cinema/includes/product_actions.html:30
+msgid "Немає в наявності"
+msgstr "Out of stock"
+
+#: cinema/templates/cinema/product_detail.html:14
+msgid "На головну"
+msgstr "Home"
+
+#: cinema/templates/cinema/product_detail.html:39
+msgid "Рік"
+msgstr "Year"
+
+#: cinema/templates/cinema/product_detail.html:43
+msgid "Тривалість"
+msgstr "Duration"
+
+#: cinema/templates/cinema/product_detail.html:48
+msgid "Виробник"
+msgstr "Production"
+
+#: cinema/templates/cinema/product_detail.html:53
+msgid "Країна"
+msgstr "Country"

@@ -1,0 +1,65 @@
+{% extends 'cinema/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ product.translation.name }}{% endblock %}
+
+{% block content %}
+
+<div class="product-detail-container">
+
+    <!-- 🔙 Кнопка повернення -->
+    <div class="back-link">
+        <a href="{% url 'cinema:home' %}?page={{ last_page }}" class="back-button">
+            🔙 {% trans "На головну" %}
+        </a>
+    </div>
+
+    <!-- ГРІД -->
+    <div class="product-grid">
+
+        <!-- ЛІВА ЧАСТИНА -->
+        <div class="product-image">
+            <img src="{{ product.translation.image.url }}"
+                 alt="{{ product.translation.name }}">
+        </div>
+
+        <!-- ПРАВА ЧАСТИНА -->
+        <div class="product-info">
+
+            <h1 class="product-title">
+                {{ product.translation.name }}
+            </h1>
+
+            <div class="product-description">
+                {{ product.translation.description }}
+            </div>
+
+            <p class="product-year">
+                <strong>{% trans "Рік" %}:</strong> {{ product.year }}
+            </p>
+
+            <p>
+                <strong>{% trans "Тривалість" %}:</strong>
+                {{ product.translation.duration }}
+            </p>
+
+            <p>
+                <strong>{% trans "Виробник" %}:</strong>
+                {{ product.translation.company }}
+            </p>
+
+            <p>
+                <strong>{% trans "Країна" %}:</strong>
+                {{ product.translation.country }}
+            </p>
+
+            <div class="button-group-detail">
+	            {% include "cinema/includes/product_actions.html" with product=product translation=product.translation %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

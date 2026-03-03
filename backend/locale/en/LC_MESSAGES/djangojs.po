@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-27 01:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cinema/static/cinema/js/cart.js:137
+msgid ""
+"Перейти до кошика для\n"
+"завершення покупки."
+msgstr ""
+"Go to cart to\n"
+"complete your purchase."
+
+#: cinema/static/cinema/js/cart.js:141
+msgid "У кошику немає товарів."
+msgstr "Your cart is empty."
+
+#: cinema/static/cinema/js/cart.js:286
+msgid "Разом:"
+msgstr "Subtotal:"
+
+#: cinema/static/cinema/js/main.js:46 cinema/static/cinema/js/main.js:60
+msgid "💸 В кошику"
+msgstr "💸 Added to cart"
+
+#: cinema/static/cinema/js/main.js:127
+msgid "Дане поле обов'язкове для заповнення."
+msgstr "This field is required."
+
+#: cinema/static/cinema/js/main.js:172 cinema/static/cinema/js/main.js:216
+msgid "Ім’я має містити лише літери."
+msgstr "Name must contain only letters."
+
+#: cinema/static/cinema/js/main.js:209 cinema/static/cinema/js/main.js:217
+msgid "Номер має бути у форматі +380XXXXXXXXX"
+msgstr "Format: +380XXXXXXXXX"
+
+#: cinema/static/cinema/js/utils/cart-item-controller.js:31
+msgid "Даний товар можна придбати в кількості не більше 10 шт."
+msgstr "You can buy up to 10 of this item."
+
+#: cinema/static/cinema/js/utils/cart-item-controller.js:95
+msgid "💸 Купити"
+msgstr "💸 Add to cart"

@@ -1,0 +1,62 @@
+x-http-healthcheck: &http-healthcheck
+  test: [ "CMD-SHELL", "python -c 'import socket, sys; s=socket.socket(); \
+                s.settimeout(1); \
+                sys.exit(0) if s.connect_ex((\"localhost\",8000))==0 else sys.exit(1)'" ]
+  interval: 15s
+  timeout: 5s
+  retries: 3
+
+services:
+  db:
+    image: postgres:17.4
+    restart: unless-stopped
+    container_name: cinema-world-postgres
+    env_file:
+      - backend/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_cinema_world_data:/var/lib/postgresql/data/
+#    secrets:
+#      - postgres_password
+#    environment:
+#      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    networks:
+      - cinema-world-network
+    healthcheck:
+      <<: *http-healthcheck
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h 127.0.0.1 || exit 1"]
+      retries: 5
+      start_period: 20s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: cinema-world-backend
+    volumes:
+      - ./backend:/usr/src/cinema-world
+    ports:
+      - "8000:8000"
+    env_file:
+      - backend/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - cinema-world-network
+    healthcheck:
+      <<: *http-healthcheck
+
+
+networks:
+  cinema-world-network:
+
+volumes:
+  postgres_cinema_world_data:
+    driver: local
+
+#secrets:
+#  postgres_password:
+#    file: ./secrets/postgres_password.txt

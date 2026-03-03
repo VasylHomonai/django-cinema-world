@@ -1,0 +1,54 @@
+{% extends 'cinema/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "КіноСвіт" %}{% endblock %}
+
+{% block content %}
+
+<div class="image-row">
+    {% for product in products %}
+        {% with product.translation as t %}
+            {% if t %}
+                <div class="image-item">
+                    <a href="{% url 'cinema:product-detail' product.slug|default:product.id %}">
+                        <img src="{{ t.image.url }}" alt="{{ t.name }}">
+                        <p class="caption title">{{ t.name }}</p>
+                    </a>
+                    <p class="caption year">{{ product.year }}</p>
+
+                    <div class="button-group">
+                        {% include "cinema/includes/product_actions.html" with product=product translation=t %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+</div>
+
+<!-- ПАГІНАЦІЯ -->
+{% if is_paginated %}
+<div class="pagination">
+
+    {% if page_obj.has_previous %}
+        <a class="page-btn" href="?page=1">&laquo;</a>
+        <a class="page-btn" href="?page={{ page_obj.previous_page_number }}">‹</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+            <span class="page-btn active">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a class="page-btn" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a class="page-btn" href="?page={{ page_obj.next_page_number }}">›</a>
+        <a class="page-btn" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+    {% endif %}
+
+</div>
+{% endif %}
+
+{% endblock %}

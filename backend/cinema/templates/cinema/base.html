@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    {% load static %}
+    {% load i18n %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% trans "КіноСвіт" %}{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'cinema/images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'cinema/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'cinema/css/cart.css' %}">
+    <link rel="stylesheet" href="{% static 'cinema/css/product_detail.css' %}">
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}{% trans 'Сайт про покупку фільмів' %}{% endblock %}" />
+    <meta property="og:description" content="{% block og_desc %}{% trans 'Відкрий для себе КіноСвіт. Дивись трейлери, купуй фільми)' %}{% endblock %}" />
+    <meta property="og:image" content="{% static 'cinema/images/KinoSvit.jpg' %}" />
+    <meta property="og:url" content="{% block og_url %}{% url 'cinema:home' %}{% endblock %}" />
+    <link rel="alternate" hreflang="uk" href="{% block alt_uk %}{% url 'cinema:home' %}{% endblock %}" />
+    <link rel="alternate" hreflang="en" href="{% block alt_en %}{% url 'cinema:home' %}?lang=en{% endblock %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{% trans 'Кіно Світ' %}" />
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path  }}">
+                <select name="language" onchange="this.form.submit()">
+                    <option value="uk" {% if LANGUAGE_CODE == 'uk' %}selected{% endif %}>UK</option>
+                    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+                </select>
+            </form>
+        </div>
+
+        <div id="cartButton" class="cart-button">
+          <img src="{% static 'cinema/images/cart-icon.png' %}" alt="{% trans 'Перейти до корзини' %}" id="cartImage">
+          <span id="cartCount" class="cart-count"></span>
+          <span class="tooltip" id="cartTooltip">{% trans "Кошик" %}</span>
+        </div>
+
+        <h1>{% trans "Кіно Світ" %}</h1>
+        <p class="tagline">{% trans "Купуй улюблений фільм на КіноСвіт!" %}</p>
+    </header>
+
+    <div class="background"></div>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 {% trans "КіноСвіт. Всі права захищені." %}</p>
+        <p>{% trans "КіноСвіт — твій провідник у світі фільмів та новинок в кіно." %}</p>
+        <p>Website by Vasyl Homonai</p>
+        <p>{% trans "Контакти:" %} <a href="mailto:info@kinosvit.ua">info@kinosvit.ua</a> | {% trans "Тел." %}: <a href="tel:+380001234567">+38 (000) 123-45-67</a></p>
+    </footer>
+
+    <!-- Модальне вікно для "Чекаута" -->
+    <div class="modal" id="buyModal">
+      <div class="modal-content" id="buyModalContent">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <h3>{% trans "Оформлення замовлення" %}</h3>
+        <h4 id="movieTitle">{% trans "Контактна інформація" %}</h4>
+        <form id="purchaseForm" novalidate>
+            <div class="form-group">
+              <input type="text" id="userName" name="userName" autocomplete="on" placeholder="{% trans 'Введіть ім’я' %}" maxlength="20">
+              <label for="userName">{% trans "Ім’я" %}</label>
+              <small class="error-message" id="nameError"></small>
+            </div>
+            <div class="form-group">
+              <input type="tel" id="userPhone" name="userPhone" autocomplete="on" placeholder="{% trans 'тел: +380...' %}" pattern="^\+380\d{9}$">
+              <label for="userPhone">{% trans "Телефон" %}</label>
+              <small class="error-message" id="phoneError">{% blocktrans %}Формат: +380XXXXXXXXX{% endblocktrans %}</small>
+            </div>
+            <button type="submit" id="confirmPurchase">{% trans "Підтвердити покупку" %}</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Модалка подяки -->
+    <div class="modal" id="thankYouModal" style="display: none;">
+      <div class="modal-content" id="thankYouModalContent">
+        <span class="close-btn" id="closeThankYou">&times;</span>
+        <h3>{% trans "Дякуємо!" %}</h3>
+        <p>{% trans "Для завершення покупки ми зв’яжемося з Вами!" %}</p>
+      </div>
+    </div>
+
+    <!-- Модалка з відео -->
+    <div id="videoModal">
+      <iframe id="videoFrame" src="" allowfullscreen></iframe>
+      <button id="closeVideo">&times;</button>
+    </div>
+
+    <!-- Попап корзини -->
+    <div id="cartPopupWrapper" class="popup-wrapper">
+        <div id="cartPopup" class="cart-popup">
+          <div class="cart-header">
+            <h2>{% trans "Кошик" %}</h2>
+            <button id="closeCartPopup" class="cart-close-btn">&times;</button>
+          </div>
+
+          <div id="cartItemsContainer" class="cart-items-container">
+            <!-- JS додає динамічно cart-item сюди. Він їх і видаляє -->
+          </div>
+
+          <div class="cart-footer">
+            <span class="total-price">
+                {% blocktrans with total="300 ₴" %}Разом: <strong>{{ total }}</strong>{% endblocktrans %}
+            </span>
+            <button class="checkout-btn" id="orderNow">{% trans "Оформити замовлення" %}</button>
+          </div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script>const STATIC_URL = "{% static '' %}";</script>
+    <script src="{% url 'cinema:javascript-catalog' %}"></script>
+    <script type="module" src="{% static 'cinema/js/main.js' %}" defer></script>
+    <script type="module" src="{% static 'cinema/js/modal-video.js' %}" defer></script>
+    <script type="module" src="{% static 'cinema/js/cart.js' %}" defer></script>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

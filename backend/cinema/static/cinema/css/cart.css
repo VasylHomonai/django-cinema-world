@@ -1,0 +1,250 @@
+.popup-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.4); /* напівпрозорий фон */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cart-popup {
+  width: min(60vw, 800px);
+  max-height: 80vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Заголовок */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #004466;
+}
+
+.cart-close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #5285cc;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.cart-close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Список товарів */
+.cart-items-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-right: 10px;
+}
+
+/* Товар в кошику */
+.cart-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 80px minmax(80px, 600px) 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  padding-top: 8px;
+  padding-right: 8px;
+}
+
+.cart-item-border {
+  border: 1px solid #004466;
+}
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+.remove-item-btn:hover {
+  color: #5285cc;
+  transform: scale(1.2);
+}
+
+.item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.item-title {
+  font-size: clamp(14px, 2vw, 16px);
+  color: #333;
+}
+
+.item-details {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.item-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-counter button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ccc;
+  background: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #004466;
+}
+
+.quantity {
+  text-align: center;
+  width: 35px;
+  height: 25px;
+  box-sizing: border-box;
+}
+
+.quantity:focus {
+  border: 1px solid #ff6600;
+  outline: none;
+}
+
+.item-price {
+  min-width: 60px;
+  text-align: right;                /* Для вирівнювання тексту по правому краю */
+  white-space: nowrap;              /* ціна повинна завжди залишатися в одному рядку, не буде обрізаною */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cart-note {
+  display: block;
+  grid-column: 1 / -1;
+  font-size: 0.85rem;
+  color: #ff6600;
+  padding-top: 4px;
+  padding-left: 8px;
+  max-width: 60%;
+}
+
+/* Нижній блок */
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.total-price {
+  font-size: 1.4rem;
+  color: #004466;
+}
+
+.total-price strong {
+  white-space: nowrap;
+}
+
+.checkout-btn {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Заберає стрілки з імпутного цифрового поля для Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Заберає стрілки з імпутного цифрового поля для: Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+@media (max-width: 992px) {
+  #cartPopup.cart-popup {
+    width: 100vw;
+    max-width: 100vw;
+    height: auto; /* за потреби: 100vh якщо треба на весь екран */
+    z-index: 9999;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 600px) {
+  #cartPopup.cart-popup {
+    height: 100vh; /* повна висота екрану */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* розділяє вміст і футер */
+    padding: 16px; /* або свій відступ */
+    box-sizing: border-box;
+  }
+
+  #cartPopup .cart-footer {
+    margin-top: auto; /* футер прижимається донизу */
+  }
+}
+
+@media (max-width: 555px) {
+  .item-details {
+    flex-direction: column-reverse; /* перенесення в стовпчик */
+    align-items: flex-end;
+    gap: 5px;
+  }
+
+  .item-title {
+    display: ruby-text;
+    padding-left: 14px;
+  }
+
+  .item-counter button {
+    margin-left: 8px;
+  }
+
+  .language-switcher {
+    right: auto; /* або right: 0; або зовсім прибрати */
+  }
+
+  .error-message {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,501 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+header, footer {
+    background-color: #004466;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    position: relative;
+}
+
+footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+.background {
+    background-image: url('../images/background.jpg');
+    background-size: cover;                         /* Заповнити весь простір блоку */
+    background-position: center;                    /* Центрувати */
+    background-repeat: no-repeat;                   /* Не повторювати */
+    min-height: 200px;                              /* Мінімальна висота для відображення */
+}
+
+main {
+    padding: 32px;                            /* Відступи блоку main з усіх сторін */
+}
+
+.image-row {
+  display: grid;                            /* Робимо контейнер CSS Grid */
+  grid-template-columns: repeat(4, 1fr);    /* Створюємо 3 рівні колонки */
+  gap: 48px;                                /* Відстань між картинками */
+  margin-bottom: 20px;                      /* Відступ до футера від блоку з товарами */
+  padding: 0 10px;                          /* Горизонтальний внутрішній відступ (щоб не прилипало до країв) */
+  box-sizing: border-box;                   /* Гарантує, що padding не збільшує ширину блоку */
+}
+
+.image-item {
+  display: flex;                            /* Внутрішній layout карточки через flex */
+  flex-direction: column;                   /* Розташовуємо елементи вертикально */
+  justify-content: space-between;           /* Кнопки притискаються донизу карточки */
+  text-align: center;                       /* Вирівнює текст і кнопки по центру */
+  padding: 10px 0;                          /* Внутрішній вертикальний відступ */
+  box-sizing: border-box;                   /* Щоб padding не порушував ширину */
+}
+
+.image-item img {
+  width: 100%;                              /* Зображення займає всю ширину контейнера */
+  height: auto;                             /* Автоматична висота, щоб зберегти пропорції */
+  border-radius: 8px;                       /* Округлені кути картинки */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);    /* Тінь навколо картинки для об’єму */
+}
+
+.image-item a {
+  text-decoration: none;                    /* прибрати підкреслення */
+  color: inherit;                           /* успадкувати колір тексту від батьків */
+  display: block;                           /* щоб вся зона була клікабельною */
+}
+
+.caption {
+  font-size: clamp(12px, 2vw, 20px);        /* Адаптивний розмір шрифту для тексту */
+  color: #004466;                           /* Колір тексту в тегу p в блоках під картинками */
+  word-break: break-word;                   /* Уникнення виходу тексту за межі */
+  margin: 0;                                /* прибираємо стандартні відступи p */
+}
+
+.caption.title {
+  margin-top: 24px;                         /* Відступ зверху між картинкою і назвою */
+}
+
+.caption.year {
+  margin-top: 10px;                          /* відступ між title і year */
+  font-size: clamp(11px, 1.8vw, 18px);
+  opacity: 0.8;
+}
+
+.image-item button {
+  margin-top: 20px;                         /* Відступ зверху між текстом і кнопкою */
+  padding: 8px 16px;                        /* Внутрішні відступи всередині кнопки (висота і ширина) */
+  background-color: #ff6600;                /* Помаранчевий фон кнопки */
+  border: 1px solid #004466;                /* Бордер кнопок обведений кольором тексту */
+  border-radius: 5px;                       /* Округлені кути кнопки */
+  color: white;                             /* Білий колір тексту кнопки */
+  cursor: pointer;                          /* Курсор-палець при наведенні — показує, що це клікабельна кнопка */
+  font-size: clamp(12px, 2vw, 20px);        /* Розмір шрифту в кнопці. мін. 10px, максимально 20px*/
+  transition: background-color 0.3s ease;   /* Плавна анімація зміни кольору при наведенні */
+}
+
+.image-item button:hover {
+  background-color: #e65500;                /* Темніший помаранчевий фон при наведенні */
+}
+
+/* Зміна кольору кнопки "💸 Купити зараз" на зелений при кожному 2-му кліку */
+button.buyNow.clicked {
+  background-color: #4CAF50;                /* Зелений фон */
+  border-color: #1e7e34;                    /* Зелена рамка */
+}
+
+button.buyNow.clicked:hover {
+  background-color: #43a047;                /* Темніший зелений при наведенні */
+}
+
+button.buyNow.disabled {
+    background-color: #999;
+    border-color: #666;
+    cursor: not-allowed;
+}
+
+button.buyNow:disabled:hover {
+    background-color: #999;
+    border-color: #666;
+}
+
+.button-group {
+  display: flex;            /* Вмикаємо flex-контейнер */
+  flex-direction: column;   /* Вертикальне розташування кнопок */
+  align-items: center;      /* Центруємо кнопки по горизонталі */
+  gap: 1px;                 /* Відстань між кнопками */
+  width: 100%;
+  max-width: 260px;         /* Потрібно ще буде доробити довжину кнопки Купити на розширеннях більше 450px */
+  margin: 0 auto;
+}
+
+.button-group button {
+  width: 100%;               /* Кнопки займатимуть всю доступну ширину */
+  max-width: 268px;          /* Але не більше 268px */
+  padding: 12px;
+  word-wrap: break-word;     /* Якщо текст довгий — переносити */
+  white-space: normal;       /* Дозволити перенос рядка */
+}
+
+h3 {
+  color: #5285cc;
+  font-weight: bold;
+  font-size: clamp(20px, 2vw, 28px);
+  margin-bottom: 0;
+}
+
+/* Це для тексту назви фільмів у попап покупки */
+h4 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: bold;
+  color: #e65500; /* яскраво-помаранчевий акцент */
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 1px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* Попап кнопки "Купити зараз". Початок */
+.modal {
+  display: none; /* приховано за замовчуванням на старті*/
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  justify-content: center;
+  align-items: center;
+  padding: 20px;                            /* щоб модалка не торкалась країв */
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  min-height: 200px;                        /* Мінімальна висота */
+  max-height: 90vh;                         /* Максимум 90% від висоти вікна */
+  overflow-y: auto;                         /* Прокрутка, якщо вміст перевищує висоту */
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+}
+
+/* Кнопка "Підтвердити покупку" */
+.modal-content button {
+  margin-top: 32px;                         /* Відступ зовніщній зверху від поля "Введіть номер телефону" і кнопкою */
+  padding: 8px 16px;                        /* Внутрішні відступи всередині кнопки (висота і ширина) */
+  font-size: clamp(12px, 2vw, 20px);        /* Розмір шрифту в кнопці */
+  background-color: #ff6600;                /* Помаранчевий фон кнопки */
+  border: 1.5px solid #004466;              /* Бордер кнопки обведений кольором тексту */
+  border-radius: 6px;                       /* Округлені кути кнопки */
+  color: white;                             /* Білий колір тексту кнопки */
+  cursor: pointer;                          /* Курсор-палець при наведенні — показує, що це клікабельна кнопка */
+  transition: background-color 0.3s ease;   /* Плавна анімація зміни кольору при наведенні */
+}
+
+.modal-content button:hover {
+  background-color: #e65500;
+}
+
+/* "плаваючий лейбл". Реалізація лейбів для імпутних полів телефона та імені. Початок */
+.form-group {
+  position: relative;
+  margin-top: 24px;
+}
+
+/* input поля модального вікна кнопки "Купити зараз" */
+.form-group input {
+  width: 90%;                               /* ширина поля в відносно попапа */
+  padding: 12px 10px;                       /* Внутрішні відступи всередині input (висота і ширина) */
+  margin: 2px 0;                            /* Відступ зовніщній, 12px зверху і знизу, 0 зліва і справа. */
+  font-size: clamp(10px, 2vw, 16px);        /* Розмір шрифту в полі */
+  border: 1px solid #5285cc;                /* Бордер поля обведений кольором */
+  border-radius: 6px;                       /* Округлені кути поля */
+}
+
+.form-group input:focus {
+  outline: none;
+  border: 1px solid #5285cc;
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.6);
+}
+
+/* Лейба захована за замовчуванням */
+.form-group label {
+  position: absolute;
+  left: 12px;
+  top: -8px;
+  background-color: white;
+  padding: 0 6px;
+  font-size: 13px;
+  color: #5285cc;
+  opacity: 0;
+  transition: 0.2s ease;
+  pointer-events: none;
+}
+
+/* Коли input у фокусі або має значення */
+.form-group input:focus + label,
+.form-group input.not-empty + label {
+  opacity: 1;
+}
+
+/* стиль для помилок "Дане поле обов'язкове для заповнення." */
+.error-message {
+  padding: 0px 10px;                       /* Внутрішні відступи всередині input (висота і ширина) */
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+  text-align: left;                             /* вирівнює текст зліва */
+}
+/* "плаваючий лейбл". Реалізація лейбів для імпутних полів телефона та імені. Кінець */
+/* Попап кнопки "Купити зараз". Кінець */
+
+
+/* Стилі для Модалка подяки. Початок */
+#thankYouModal .modal-content {
+  background-color: #fff7e6; /* М’який світло-жовтий фон */
+  border-radius: 20px;
+  padding: 30px 40px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 2px solid #5285cc;
+  animation: slideUpFade 0.4s ease;
+  position: relative;
+}
+
+#thankYouModal p {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #5285cc;
+  transition: transform 0.2s ease;
+}
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Стилі для Модалка подяки. Кінець */
+
+
+/* Стилі для Модалки відео. Початок */
+#videoModal {
+  display: none; /* спочатку схована */
+  position: fixed; /* фіксована позиція на екрані */
+  top: 0; left: 0; right: 0; bottom: 0; /* покриває весь екран */
+  background-color: rgba(0, 0, 0, 0.7); /* затемнений фон */
+  z-index: 1000; /* щоб була поверх всього */
+  display: flex; /* для центрування контенту */
+  justify-content: center;
+  align-items: center;
+}
+
+#videoModal iframe {
+  width: 80vw;
+  height: 45vw; /* 16:9 співвідношення */
+  max-width: 900px;
+  max-height: 506px;
+  border: none;
+  background: black;
+  border-radius: 8px;
+}
+
+#closeVideo {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1010;
+  transition: transform 0.2s ease;
+}
+
+#closeVideo:hover {
+  transform: scale(1.2);
+}
+/* Стилі для Модалки відео. Кінець */
+
+
+/*  Кнопка перемикача мови. Початок */
+.language-switcher {
+  position: absolute;
+  top: 10px;
+  right: 80px;
+}
+
+.language-switcher select {
+  padding: 6px 6px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 2px solid #ff6600;
+  cursor: pointer;
+}
+
+.language-switcher option {
+  background-color: yellow;
+  color: black;
+}
+/*  Кнопка перемикача мови. Кінець */
+
+/*  Кнопка корзини. Початок */
+.cart-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.cart-button img {
+  width: 48px;
+  height: 29px;
+  border-radius: 10px;
+  border: 2px solid #ff6600;
+}
+
+.cart-count {
+  position: absolute;
+  top: -2px;
+  right: -3px;
+  background-color: #22B14C;
+  color: white;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  display: none; /* буде видно лише коли > 0 */
+}
+
+/* Для тултипу корзини */
+.tooltip {
+  visibility: hidden;           /* Невидимий елемент в DOM */
+  opacity: 0;                   /* елемент повністю прозорий. Комбінування з visibility */
+  position: fixed;              /* тултип прив’язаний до конкретного місця у вікні браузера */
+  top: 48px;                    /* Відстань від верхнього краю вікна до верхньої межі тултипу. */
+  right: 15px;                  /* Відстань від правого краю вікна до правої межі тултипу. */
+  transform: none;              /* Вимикає будь-яке зміщення або обертання */
+  background-color: #fff;       /* Фон білий */
+  color: #333;                  /* Текст темно-сірий */
+  padding: 6px 10px;            /* внутрішній відступ: 6px зверху/знизу і 10px зліва/справа. */
+  border-radius: 5px;           /* Заокруглення кутів. */
+  border: 1px solid #ff6600;    /* Помаранчева рамка */
+  /* white-space: nowrap;       /* Відображення тексту тултипа одним рядком. Якщо не вміщується, він буде обрізаний. */
+  white-space: pre-line;        /* Відображення тексту тултипа з урахуванням "\n" переносу тексту*/
+  font-size: 14px;              /* Розмір шрифту тултипу. */
+  /* text-align: left;          /* Для вирівнювання тексту по лівому краю */
+  z-index: 1000;                /* Тултип буде “поверх” багатьох елементів. 1000 велике значення для більшості випадків */
+  max-width: calc(100vw - 20px); /* Тултип ніколи не буде ширшим, ніж вікно браузера мінус 20px (по 10px зліва і справа) */
+  overflow: hidden;             /* Усе, що виходить за межі тултипу, обрізається. */
+  text-overflow: ellipsis;      /* якщо текст не поміщається — ставиться …. */
+  pointer-events: none;         /* Тултип не приймає кліки або ховери. */
+  transition: opacity 0.3s ease; /* Плавна зміна прозорості (opacity) протягом 0.3 секунди. */
+}
+
+.cart-button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+/*  Кнопка корзини. Кінець */
+
+/* Кнопки ціна та купити. Початок */
+.buy-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;              /* Займає всю ширину .image-item */
+  margin: 0 auto;           /* Центрує блок */
+  gap: 8px;
+}
+
+.price {
+  color: #004466;
+  font-weight: bold;
+  font-size: clamp(14px, 2vw, 20px);
+  white-space: nowrap;
+}
+
+/* PAGINATION */
+.pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 36px;
+    text-align: center;
+}
+
+.page-btn:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.page-btn.active {
+    background: #2563eb;
+    color: white;
+    pointer-events: none;
+}
+
+
+@media (max-width: 509px) {
+  .buy-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ціна й кнопка вирівняні по лівому краю */
+    gap: 8px;
+  }
+
+  .button-group {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .image-item button {
+    margin-top: 0;
+  }
+
+  .price {
+    margin-top: 12px;
+    align-self: baseline; /* робить ціну незалежною від вирівнювання решти */
+  }
+}
+/* Кнопки ціна та купити. Кінець */

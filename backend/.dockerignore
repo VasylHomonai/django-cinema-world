@@ -1,0 +1,35 @@
+# Ігноруємо локальні залежності
+node_modules/
+.venv/
+
+# Python кеш
+__pycache__/
+*.pyc
+*.pyo
+.gitignore
+Dockerfile
+.env
+
+# Git
+.git
+
+# Логи
+*.log
+
+# IDE/системні файли
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+Users.sql
+backup.sql
+
+# Ігноруємо будь-які тимчасові файли
+*.tmp
+*.swp
+*.bak
+
+# Документація та зайві файли
+*.md
+*.txt
+!requirements.txt

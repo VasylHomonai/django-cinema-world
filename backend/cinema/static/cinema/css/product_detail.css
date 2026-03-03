@@ -1,0 +1,113 @@
+.product-detail-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.back-link {
+    margin-bottom: 30px;
+}
+
+.back-button {
+    text-decoration: none;
+    font-weight: 600;
+    color: #ff6600;
+    font-size: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 35%) 1fr;
+    gap: 40px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.product-description {
+    line-height: 1.6;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+.button-group-detail {
+  display: flex;            /* Вмикаємо flex-контейнер */
+  flex-direction: column;   /* Вертикальне розташування кнопок */
+  align-items: flex-end;    /* Центруємо кнопки по горизонталі */
+  gap: 12px;                /* Відстань між кнопками */
+  max-width: 260px;         /* Потрібно ще буде доробити довжину кнопки Купити на розширеннях більше 450px */
+  margin-left: auto;
+}
+
+.button-group-detail button {
+  padding: 12px;                            /* Внутрішні відступи всередині кнопки (висота і ширина) */
+  background-color: #ff6600;                /* Помаранчевий фон кнопки */
+  border: 1px solid #004466;                /* Бордер кнопок обведений кольором тексту */
+  border-radius: 5px;                       /* Округлені кути кнопки */
+  color: white;                             /* Білий колір тексту кнопки */
+  cursor: pointer;                          /* Курсор-палець при наведенні — показує, що це клікабельна кнопка */
+  font-size: clamp(12px, 2vw, 20px);        /* Розмір шрифту в кнопці. мін. 10px, максимально 20px*/
+  transition: background-color 0.3s ease;   /* Плавна анімація зміни кольору при наведенні */
+  width: 100%;
+}
+
+.button-group-detail button:hover {
+  background-color: #e65500;                /* Темніший помаранчевий фон при наведенні */
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;   /* одна колонка */
+        gap: 20px;
+    }
+
+    .product-image {
+        max-width: 500px;   /* щоб не розтягувалась занадто */
+        margin: 0 auto;     /* центруємо */
+    }
+
+    .product-info {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+       padding: 4px;
+    }
+
+    .product-info h1 {
+        font-size: 22px;
+    }
+
+    .product-info p {
+        font-size: 14px;
+    }
+
+    .button-group-detail {
+        gap: 10px;
+    }
+
+    .button-group-detail {
+        max-width: 100%;     /* прибираємо обмеження */
+        margin-left: 0;      /* більше не притискаємо вправо */
+        align-items: stretch; /* кнопки розтягуються */
+    }
+
+    .button-group-detail button {
+        width: 100%;
+    }
+}

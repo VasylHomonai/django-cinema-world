@@ -1,0 +1,33 @@
+{% load i18n %}
+
+{% comment %}
+Використання:
+{% include "cinema/includes/product_actions.html" with product=product translation=product.translation %}
+{% endcomment %}
+
+<!-- Кнопка перегляду трейлеру -->
+{% if translation.trailer_url %}
+    <button class="openVideo"
+            data-video-id="{{ translation.trailer_url }}">
+        🎬 {% trans "Переглянути трейлер" %}
+    </button>
+{% endif %}
+
+<!-- Кнопка покупки -->
+<div class="buy-wrapper">
+    <div class="price">{{ product.price }} ₴</div>
+
+    {% if product.is_available %}
+        <button class="buyNow"
+                data-id="{{ product.id }}"
+                data-title="{{ translation.name }}"
+                data-price="{{ product.price }}"
+                data-image="{{ translation.image.url }}">
+            💸 {% trans "Купити" %}
+        </button>
+    {% else %}
+        <button class="buyNow disabled" disabled>
+            {% trans "Немає в наявності" %}
+        </button>
+    {% endif %}
+</div>
