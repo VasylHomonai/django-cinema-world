@@ -18,7 +18,10 @@ class ProductListView(ListView):
 
         return (
             Product.objects
-            .filter(translations__lang=language)
+            .filter(
+                is_active=True,
+                translations__lang=language
+            )
             .annotate(
                 in_stock=ExpressionWrapper(
                     Q(quantity__gt=0),

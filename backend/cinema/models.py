@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 # Create your models here.
@@ -13,6 +14,14 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, null=True, blank=True)
     created_at = models.DateTimeField("Створено", auto_now_add=True)
     updated_at = models.DateTimeField("Оновлено", auto_now=True)
+    author = models.ForeignKey(
+        User,
+        verbose_name="Автор",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="products"
+    )
 
     @property
     def translation(self):
@@ -27,7 +36,7 @@ class Product(models.Model):
             en_translation = self.translations.filter(lang='en').first()
             if en_translation:
                 self.slug = slugify(en_translation.name)
-                Product.objects.filter(pk=self.pk).update(slug=self.slug)
+                super().save(update_fields=['slug'])
 
     @property
     def is_available(self):
@@ -68,7 +77,9 @@ class ProductTranslation(models.Model):
     updated_at = models.DateTimeField("Оновлено", auto_now=True)
 
     class Meta:
-        unique_together = ('product', 'lang')  # Забороняє дублювати одну мову для одного продукту
+        constraints = [
+            models.UniqueConstraint(fields=['product', 'lang'], name='unique_product_lang')
+        ]  # Забороняє дублювати одну мову для одного продукту
 
     def __str__(self):
         return f"{self.name} ({self.lang})"
