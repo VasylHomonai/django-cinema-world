@@ -18,6 +18,7 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  display: flex;
   flex-direction: column;
   padding: 20px;
   overflow: hidden;
@@ -52,11 +53,13 @@
 /* Список товарів */
 .cart-items-container {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding-right: 10px;
+  scroll-behavior: smooth;
 }
 
 /* Товар в кошику */
@@ -98,7 +101,7 @@
 }
 
 .item-title {
-  font-size: clamp(14px, 2vw, 16px);
+  font-size: clamp(14px, 1.2vw, 16px);
   color: #333;
 }
 
@@ -246,5 +249,45 @@ input[type=number]::-webkit-inner-spin-button {
 
   .error-message {
     font-size: 10px;
+  }
+
+  .total-price {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 414px) {
+  .cart-header h2 {
+    font-size: 18px;
+  }
+
+  .cart-item {
+    grid-template-columns: 24px 50px minmax(60px, 1fr) auto;
+    gap: 8px;
+  }
+
+  .item-title {
+    padding-left: 4px;
+  }
+
+  .item-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .item-details {
+    gap: 6px;
+  }
+
+  .item-price {
+    font-size: 1rem;
+  }
+
+  .checkout-btn {
+    font-size: 14px;
+  }
+
+  .total-price {
+    font-size: 16px;
   }
 }
