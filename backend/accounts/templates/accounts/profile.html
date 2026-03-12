@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% blocktrans with username=request.user.username %}
+    Профіль {{ username }}
+  {% endblocktrans %}
+{% endblock %}
+
+{% block body_class %}profile-page{% endblock %}
+
+{% block background_class %}no-background{% endblock %}
+
+{% block content %}
+    <!-- 🔙 Кнопка повернення -->
+    <div class="back-link">
+        <a href="{% url 'cinema:home' %}" class="back-button">
+            🔙 {% trans "На головну" %}
+        </a>
+    </div>
+
+    <h2>{% trans "Особиста інформація:" %}</h2>
+
+    <div class="profile-grid">
+        <!-- username -->
+        {% include "accounts/includes/field.html" with label="Nickname" field="username" value=request.user.username editable=True deletable=False %}
+        <!-- first name -->
+        {% include "accounts/includes/field.html" with label=_("Ім'я") field="first_name" value=request.user.first_name editable=True deletable=False %}
+        <!-- last name -->
+        {% include "accounts/includes/field.html" with label=_("Фамілія") field="last_name" value=request.user.last_name editable=True deletable=False %}
+        <!-- email -->
+        {% include "accounts/includes/field.html" with label="Email" field="email" value=request.user.email editable=True deletable=False %}
+
+        <!-- phone -->
+        {% include "accounts/includes/field.html" with label=_("Телефон") field="phone" value=request.user.profile.phone editable=True deletable=False %}
+        <!-- city -->
+        {% include "accounts/includes/field.html" with label=_("Місто") field="city" value=request.user.profile.city editable=True deletable=True %}
+        <!-- address -->
+        {% include "accounts/includes/field.html" with label=_("Адреса") field="address" value=request.user.profile.address editable=True deletable=True %}
+    </div>
+
+    <div class="profile-section" id="change-password-section">
+
+        <div class="password-header" id="passwordToggle">
+            <h3>🔒{% trans "Зміна паролю" %}</h3>
+            <span class="password-arrow"></span>
+        </div>
+
+        <form id="changePasswordForm" class="password-form collapsed">
+
+            <div class="form-group">
+                <input type="password" name="old_password" id="old_password" class="form-control"
+                       placeholder="{% trans 'Введіть поточний пароль' %}">
+                <label for="old_password">{% trans "Поточний пароль" %}</label>
+                <div class="error-message" id="old_passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="new_password1" id="new_password1" class="form-control"
+                       placeholder="{% trans 'Введіть новий пароль' %}">
+                <label for="new_password1">{% trans "Новий пароль" %}</label>
+                <div class="error-message" id="new_password1Error"></div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="new_password2" id="new_password2" class="form-control"
+                       placeholder="{% trans 'Повторіть новий пароль' %}">
+                <label for="new_password2">{% trans "Підтвердження пароля" %}</label>
+                <div class="error-message" id="new_password2Error"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">{% trans "Змінити пароль" %}</button>
+
+        </form>
+
+    </div>
+
+{% endblock %}

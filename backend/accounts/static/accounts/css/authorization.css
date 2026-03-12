@@ -1,0 +1,188 @@
+/*  Кнопка авторизації. Початок */
+/* Для неавторизованого користувача */
+#userButton img {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 2px solid #ff6600;
+}
+
+/* Для авторизованого користувача */
+.user-button {
+  position: absolute;
+  top: 10px;
+  right: 150px;
+  display: inline-block;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.user-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.user-link img {
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 2px solid #ff6600;
+}
+
+.user-tooltip {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  visibility: hidden;
+  opacity: 0;
+  background-color: #fff;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ff6600;
+  font-size: 14px;
+  max-width: min(200px, calc(100vw - 40px));
+  overflow-wrap: break-word;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.user-tooltip .nowrap {
+    white-space: nowrap;
+}
+
+/* Tooltip при hover, якщо меню НЕ відкрите */
+.user-button:not(.active):hover .user-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Приховуємо tooltip завжди при активному меню */
+.user-button.active .user-tooltip {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* User menu */
+.user-menu {
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #ff6600;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.user-menu li {
+  margin: 0;
+}
+
+.user-menu li a,
+.user-menu li form.logout-form button {
+  display: block;
+  width: 100%;
+  padding: 8px 0px;
+  text-decoration: none;
+  color: #333;
+  box-sizing: border-box;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+
+.user-menu li a:hover,
+.user-menu li form.logout-form button:hover {
+  background-color: #ff6600;
+  color: #fff;
+  border-radius: 6px;
+}
+
+/* Показ меню при відкритті */
+.user-button.active .user-menu {
+  display: block;
+}
+/*  Кнопка користувача. Кінець */
+
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background: #eee;
+}
+
+.auth-tab.active {
+  background: #ff6600;
+  color: white;
+}
+
+.auth-tab-content {
+  display: none;
+}
+
+.auth-tab-content.active {
+  display: block;
+}
+
+/* Кнопки Вхід / Реєстрація */
+.auth-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 44px;
+}
+
+.auth-tabs button {
+  background-color: #cce5ff;
+  color: #004466;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Активна вкладка */
+.auth-tabs button.active {
+  background-color: #004466;
+}
+
+/* Hover для неактивної кнопки */
+.auth-tabs button:not(.active):hover {
+  background-color: #99ccff;
+}
+
+.required-field label::before {
+    content: "*";
+    color: #e65500;
+    margin-right: 6px;
+    font-weight: bold;
+}
+
+
+@media (max-width: 555px) {
+  .user-button {
+    right: 72px;
+  }
+}
+
+.orders-placeholder {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 22px;
+    color: #555;
+}

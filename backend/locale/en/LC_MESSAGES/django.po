@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-03 19:30+0200\n"
+"POT-Creation-Date: 2026-03-12 01:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,98 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: cinema/templates/cinema/base.html:8 cinema/templates/cinema/products.html:5
-msgid "КіноСвіт"
-msgstr "KinoSvit"
+#: accounts/forms.py:14
+msgid "Номер телефону має бути у форматі +380XXXXXXXXX або 0XXXXXXXXX"
+msgstr "Phone number must be in the format +380XXXXXXXXX or 0XXXXXXXXX"
 
-#: cinema/templates/cinema/base.html:14
-msgid "Сайт про покупку фільмів"
-msgstr "An online store for purchasing movies"
-
-#: cinema/templates/cinema/base.html:15
-msgid "Відкрий для себе КіноСвіт. Дивись трейлери, купуй фільми)"
-msgstr "Explore KinoSvit. Watch trailers and buy movies."
-
-#: cinema/templates/cinema/base.html:21 cinema/templates/cinema/base.html:43
-msgid "Кіно Світ"
-msgstr "Kino Svit"
-
-#: cinema/templates/cinema/base.html:38
-msgid "Перейти до корзини"
-msgstr "Go to cart"
-
-#: cinema/templates/cinema/base.html:40 cinema/templates/cinema/base.html:103
-msgid "Кошик"
-msgstr "Cart"
-
-#: cinema/templates/cinema/base.html:44
-msgid "Купуй улюблений фільм на КіноСвіт!"
-msgstr "Buy your favorite movie at KinoSvit!"
-
-#: cinema/templates/cinema/base.html:55
-msgid "КіноСвіт. Всі права захищені."
-msgstr "KinoSvit. All rights reserved."
-
-#: cinema/templates/cinema/base.html:56
-msgid "КіноСвіт — твій провідник у світі фільмів та новинок в кіно."
-msgstr "KinoSvit — your gateway to movies and the latest cinema hits."
-
-#: cinema/templates/cinema/base.html:58
-msgid "Контакти:"
-msgstr "Contacts:"
-
-#: cinema/templates/cinema/base.html:58
-msgid "Тел."
-msgstr "Tel."
-
-#: cinema/templates/cinema/base.html:65
-msgid "Оформлення замовлення"
-msgstr "Checkout"
-
-#: cinema/templates/cinema/base.html:66
-msgid "Контактна інформація"
-msgstr "Contact information"
-
-#: cinema/templates/cinema/base.html:69
-msgid "Введіть ім’я"
-msgstr "Enter your name"
-
-#: cinema/templates/cinema/base.html:70
-msgid "Ім’я"
-msgstr "Name"
-
-#: cinema/templates/cinema/base.html:74
-msgid "тел: +380..."
-msgstr "tel: +380..."
-
-#: cinema/templates/cinema/base.html:75
+#: accounts/forms.py:22 accounts/templates/accounts/profile.html:33
+#: templates/base.html:79
 msgid "Телефон"
 msgstr "Phone"
 
-#: cinema/templates/cinema/base.html:76
-msgid "Формат: +380XXXXXXXXX"
-msgstr "Format: +380XXXXXXXXX"
+#: accounts/forms.py:40 accounts/templates/accounts/profile.html:26
+#: templates/base.html:167 templates/base.html:168
+msgid "Ім'я"
+msgstr "First name"
 
-#: cinema/templates/cinema/base.html:78
-msgid "Підтвердити покупку"
-msgstr "Confirm Purchase"
+#: accounts/forms.py:41 accounts/templates/accounts/profile.html:28
+#: templates/base.html:172 templates/base.html:173
+msgid "Фамілія"
+msgstr "Last name"
 
-#: cinema/templates/cinema/base.html:87
-msgid "Дякуємо!"
-msgstr "Thank you!"
+#: accounts/forms.py:51
+msgid "Користувач з таким нікнеймом вже існує"
+msgstr "A user with this username already exists"
 
-#: cinema/templates/cinema/base.html:88
-msgid "Для завершення покупки ми зв’яжемося з Вами!"
-msgstr "We'll contact you to complete the purchase."
+#: accounts/forms.py:58
+msgid "Користувач з таким email вже існує"
+msgstr "A user with this email already exists"
 
-#: cinema/templates/cinema/base.html:113
+#: accounts/forms.py:73 accounts/templates/accounts/profile.html:52
+msgid "Поточний пароль"
+msgstr "Current password"
+
+#: accounts/forms.py:78 accounts/templates/accounts/profile.html:59
+msgid "Новий пароль"
+msgstr "New password"
+
+#: accounts/forms.py:83
+msgid "Підтвердження нового пароля"
+msgstr "Confirm new password"
+
+#: accounts/templates/accounts/orders.html:12
+#: accounts/templates/accounts/profile.html:16
+#: cinema/templates/cinema/product_detail.html:16
+msgid "На головну"
+msgstr "Home"
+
+#: accounts/templates/accounts/orders.html:16
+msgid "Мої замовлення:"
+msgstr "My orders:"
+
+#: accounts/templates/accounts/orders.html:18
+msgid "Дана сторінка знаходиться у процесі розробки."
+msgstr "This page is under development."
+
+#: accounts/templates/accounts/profile.html:5
 #, python-format
-msgid "Разом: <strong>%(total)s</strong>"
-msgstr "Subtotal: <strong>%(total)s</strong>"
+msgid ""
+"\n"
+"    Профіль %(username)s\n"
+"  "
+msgstr ""
+"\n"
+"    Profile %(username)s\n"
+"  "
 
-#: cinema/templates/cinema/base.html:115
-msgid "Оформити замовлення"
-msgstr "Proceed to checkout"
+#: accounts/templates/accounts/profile.html:20
+msgid "Особиста інформація:"
+msgstr "Personal information:"
+
+#: accounts/templates/accounts/profile.html:35
+msgid "Місто"
+msgstr "City"
+
+#: accounts/templates/accounts/profile.html:37
+msgid "Адреса"
+msgstr "Address"
+
+#: accounts/templates/accounts/profile.html:43
+msgid "Зміна паролю"
+msgstr "Change password"
+
+#: accounts/templates/accounts/profile.html:51
+msgid "Введіть поточний пароль"
+msgstr "Current password"
+
+#: accounts/templates/accounts/profile.html:58
+msgid "Введіть новий пароль"
+msgstr "New password"
+
+#: accounts/templates/accounts/profile.html:65
+msgid "Повторіть новий пароль"
+msgstr "Repeat password"
+
+#: accounts/templates/accounts/profile.html:66
+msgid "Підтвердження пароля"
+msgstr "Repeat password"
+
+#: accounts/templates/accounts/profile.html:70
+msgid "Змінити пароль"
+msgstr "Change password"
+
+#: accounts/views.py:116
+msgid "Nickname не може бути порожнім"
+msgstr "Nickname cannot be empty"
+
+#: accounts/views.py:119
+msgid "Цей нікнейм вже зайнятий"
+msgstr "This username is already taken"
+
+#: accounts/views.py:124
+msgid "Email не може бути порожнім"
+msgstr "Email cannot be empty"
+
+#: accounts/views.py:127
+msgid "Цей email вже використовується"
+msgstr "This email is already in use"
 
 #: cinema/templates/cinema/includes/product_actions.html:12
 msgid "Переглянути трейлер"
@@ -123,30 +146,176 @@ msgstr "Add to cart"
 msgid "Немає в наявності"
 msgstr "Out of stock"
 
-#: cinema/templates/cinema/product_detail.html:14
-msgid "На головну"
-msgstr "Home"
-
-#: cinema/templates/cinema/product_detail.html:39
+#: cinema/templates/cinema/product_detail.html:41
 msgid "Рік"
 msgstr "Year"
 
-#: cinema/templates/cinema/product_detail.html:43
+#: cinema/templates/cinema/product_detail.html:45
 msgid "Тривалість"
 msgstr "Duration"
 
-#: cinema/templates/cinema/product_detail.html:48
+#: cinema/templates/cinema/product_detail.html:50
 msgid "Виробник"
 msgstr "Production"
 
-#: cinema/templates/cinema/product_detail.html:53
+#: cinema/templates/cinema/product_detail.html:55
 msgid "Країна"
 msgstr "Country"
 
-#: cinema/templates/cinema/products.html:31
+#: cinema/templates/cinema/products.html:5 templates/base.html:8
+msgid "КіноСвіт"
+msgstr "KinoSvit"
+
+#: cinema/templates/cinema/products.html:33
 msgid "Поки що товарів немає"
 msgstr "No products yet"
 
-#: cinema/templates/cinema/products.html:32
+#: cinema/templates/cinema/products.html:34
 msgid "Перевірте пізніше або перегляньте інші категорії"
 msgstr "Check back later or explore other categories"
+
+#: templates/base.html:16
+msgid "Сайт про покупку фільмів"
+msgstr "An online store for purchasing movies"
+
+#: templates/base.html:17
+msgid "Відкрий для себе КіноСвіт. Дивись трейлери, купуй фільми)"
+msgstr "Explore KinoSvit. Watch trailers and buy movies."
+
+#: templates/base.html:23 templates/base.html:47
+msgid "Кіно Світ"
+msgstr "Kino Svit"
+
+#: templates/base.html:42
+msgid "Перейти до корзини"
+msgstr "Go to cart"
+
+#: templates/base.html:44 templates/base.html:107
+msgid "Кошик"
+msgstr "Cart"
+
+#: templates/base.html:48
+msgid "Купуй улюблений фільм на КіноСвіт!"
+msgstr "Buy your favorite movie at KinoSvit!"
+
+#: templates/base.html:59
+msgid "КіноСвіт. Всі права захищені."
+msgstr "KinoSvit. All rights reserved."
+
+#: templates/base.html:60
+msgid "КіноСвіт — твій провідник у світі фільмів та новинок в кіно."
+msgstr "KinoSvit — your gateway to movies and the latest cinema hits."
+
+#: templates/base.html:62
+msgid "Контакти:"
+msgstr "Contacts:"
+
+#: templates/base.html:62
+msgid "Тел."
+msgstr "Tel."
+
+#: templates/base.html:69
+msgid "Оформлення замовлення"
+msgstr "Checkout"
+
+#: templates/base.html:70
+msgid "Контактна інформація"
+msgstr "Contact information"
+
+#: templates/base.html:73
+msgid "Введіть ім’я"
+msgstr "Enter your name"
+
+#: templates/base.html:74
+msgid "Ім’я"
+msgstr "Name"
+
+#: templates/base.html:78
+msgid "тел: +380..."
+msgstr "tel: +380..."
+
+#: templates/base.html:80
+msgid "Формат: +380XXXXXXXXX"
+msgstr "Format: +380XXXXXXXXX"
+
+#: templates/base.html:82
+msgid "Підтвердити покупку"
+msgstr "Confirm Purchase"
+
+#: templates/base.html:91
+msgid "Дякуємо!"
+msgstr "Thank you!"
+
+#: templates/base.html:92
+msgid "Для завершення покупки ми зв’яжемося з Вами!"
+msgstr "We'll contact you to complete the purchase."
+
+#: templates/base.html:117
+#, python-format
+msgid "Разом: <strong>%(total)s</strong>"
+msgstr "Subtotal: <strong>%(total)s</strong>"
+
+#: templates/base.html:119
+msgid "Оформити замовлення"
+msgstr "Proceed to checkout"
+
+#: templates/base.html:131
+msgid "Вхід"
+msgstr "Login"
+
+#: templates/base.html:132
+msgid "Реєстрація"
+msgstr "Register"
+
+#: templates/base.html:141
+msgid "Логін або email"
+msgstr "Username or email"
+
+#: templates/base.html:142
+msgid "Логін / Email"
+msgstr "Username / Email"
+
+#: templates/base.html:146 templates/base.html:147 templates/base.html:183
+#: templates/base.html:184
+msgid "Пароль"
+msgstr "Password"
+
+#: templates/base.html:151
+msgid "Увійти"
+msgstr "Sign in"
+
+#: templates/base.html:161 templates/base.html:162
+msgid "Логін"
+msgstr "Username"
+
+#: templates/base.html:177
+msgid "Email"
+msgstr "Email"
+
+#: templates/base.html:188 templates/base.html:189
+msgid "Повторіть пароль"
+msgstr "Repeat password"
+
+#: templates/base.html:193 templates/includes/user_menu.html:29
+msgid "Зареєструватись"
+msgstr "Sign up"
+
+#: templates/includes/user_menu.html:13
+msgid "Профіль"
+msgstr "Profile"
+
+#: templates/includes/user_menu.html:14
+msgid "Мої замовлення"
+msgstr "My orders"
+
+#: templates/includes/user_menu.html:17
+msgid "Вийти"
+msgstr "Logout"
+
+#: templates/includes/user_menu.html:25
+msgid "Увійти/Зареєструватись"
+msgstr "Sign in/ Sign up"
+
+#: templates/includes/user_menu.html:27
+msgid "Увійти /"
+msgstr "Sign in /"

@@ -1,8 +1,10 @@
-{% extends 'cinema/base.html' %}
+{% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
 
 {% block title %}{{ product.translation.name }}{% endblock %}
+
+{% block background_class %}cinema-background{% endblock %}
 
 {% block content %}
 

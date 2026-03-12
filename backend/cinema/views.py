@@ -1,8 +1,9 @@
-from django.views.generic import ListView, DetailView
-from django.db.models import Prefetch, ExpressionWrapper, BooleanField, Q
-from django.utils.translation import get_language
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import BooleanField, ExpressionWrapper, Prefetch, Q
 from django.http import Http404
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils.translation import get_language
+from django.views.generic import DetailView, ListView
+
 from .models import Product, ProductTranslation
 
 

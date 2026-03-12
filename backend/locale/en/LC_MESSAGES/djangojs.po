@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-27 01:00+0000\n"
+"POT-Creation-Date: 2026-03-11 21:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/static/accounts/js/authorization.js:127
+msgid "Невірний пароль."
+msgstr "Incorrect password."
+
+#: accounts/static/accounts/js/profile.js:66
+msgid "Nickname не може бути порожнім"
+msgstr "Nickname cannot be empty"
+
+#: accounts/static/accounts/js/profile.js:67
+msgid "Email не може бути порожнім"
+msgstr "Email cannot be empty"
+
+#: accounts/static/accounts/js/profile.js:65
+msgid "username"
+msgstr "username"
+
+#: accounts/static/accounts/js/profile.js:100
+msgid "Збережено"
+msgstr "Saved"
+
+#: accounts/static/accounts/js/profile.js:108
+msgid "Не вдалося зберегти зміни"
+msgstr "Failed to save changes"
+
+#: accounts/static/accounts/js/profile.js:114
+#: accounts/static/accounts/js/profile.js:164
+#: accounts/static/accounts/js/profile.js:307
+msgid "Помилка мережі"
+msgstr "Network error"
+
+#: accounts/static/accounts/js/profile.js:155
+msgid "Поле очищено"
+msgstr "Field cleared"
+
+#: accounts/static/accounts/js/profile.js:159
+msgid "Щось пішло не так"
+msgstr "Something went wrong"
 
 #: cinema/static/cinema/js/cart.js:137
 msgid ""

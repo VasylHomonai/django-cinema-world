@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Мої замовлення{% endblock %}
+
+{% block body_class %}profile-page{% endblock %}
+
+{% block background_class %}no-background{% endblock %}
+
+{% block content %}
+    <!-- 🔙 Кнопка повернення -->
+    <div class="back-link">
+        <a href="{% url 'cinema:home' %}" class="back-button">
+            🔙 {% trans "На головну" %}
+        </a>
+    </div>
+
+    <h2>{% trans "Мої замовлення:" %}</h2>
+    <div class="orders-placeholder">
+        <p>{% trans "Дана сторінка знаходиться у процесі розробки." %}</p>
+    </div>
+
+{% endblock %}

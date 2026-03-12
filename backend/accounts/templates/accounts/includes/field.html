@@ -1,0 +1,27 @@
+{# accounts/includes/field.html #}
+
+<div class="profile-label">{{ label }}</div>
+<div class="profile-value">
+
+    {# VIEW MODE #}
+    <span class="profile-text user-{{ field }}">{{ value|default:"—" }}</span>
+    {% if editable %}
+        <button class="edit-btn" data-field="{{ field }}">✏️</button>
+    {% endif %}
+    {% if deletable %}
+        <button class="delete-btn" data-field="{{ field }}">🗑</button>
+    {% endif %}
+
+    {# EDIT MODE #}
+    {% if editable %}
+    <div class="edit-mode">
+        <input type="text"
+               class="edit-input"
+               value="{{ value|default:'' }}"
+               data-original-value="{{ value|default:'' }}">
+        <button type="button" class="save-btn">✔</button>
+        <button type="button" class="cancel-btn">✖</button>
+    </div>
+    {% endif %}
+
+</div>

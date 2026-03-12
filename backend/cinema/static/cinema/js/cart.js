@@ -131,12 +131,12 @@ export function updateCartState() {
   // Зміна картинки та тултипа
   try {
       if (count > 0) {
-        cartImg.src = STATIC_URL + "cinema/images/cart-icon-2.png";
+        cartImg.src = API_URLS.static + "cinema/images/cart-icon-2.png";
         cartCount.textContent = count;
         cartCount.style.display = "inline-block";
         cartTooltip.textContent = gettext("Перейти до кошика для\nзавершення покупки.");
       } else {
-        cartImg.src = STATIC_URL + "cinema/images/cart-icon.png";
+        cartImg.src = API_URLS.static + "cinema/images/cart-icon.png";
         cartCount.style.display = "none";
         cartTooltip.textContent = gettext("У кошику немає товарів.");
       }

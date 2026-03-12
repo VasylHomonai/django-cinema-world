@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{% static 'cinema/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'cinema/css/cart.css' %}">
     <link rel="stylesheet" href="{% static 'cinema/css/product_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/authorization.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
     <!-- Open Graph -->
     <meta property="og:title" content="{% block og_title %}{% trans 'Сайт про покупку фільмів' %}{% endblock %}" />
     <meta property="og:description" content="{% block og_desc %}{% trans 'Відкрий для себе КіноСвіт. Дивись трейлери, купуй фільми)' %}{% endblock %}" />
@@ -21,8 +23,10 @@
     <meta property="og:site_name" content="{% trans 'Кіно Світ' %}" />
     {% block extra_head %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <header>
+        {% include "includes/user_menu.html" %}
+
         <div class="language-switcher">
             <form action="{% url 'set_language' %}" method="post">
                 {% csrf_token %}
@@ -37,14 +41,14 @@
         <div id="cartButton" class="cart-button">
           <img src="{% static 'cinema/images/cart-icon.png' %}" alt="{% trans 'Перейти до корзини' %}" id="cartImage">
           <span id="cartCount" class="cart-count"></span>
-          <span class="tooltip" id="cartTooltip">{% trans "Кошик" %}</span>
+          <span class="cart-tooltip" id="cartTooltip">{% trans "Кошик" %}</span>
         </div>
 
         <h1>{% trans "Кіно Світ" %}</h1>
         <p class="tagline">{% trans "Купуй улюблений фільм на КіноСвіт!" %}</p>
     </header>
 
-    <div class="background"></div>
+    <div class="page-background {% block background_class %}{% endblock %}"></div>
 
     <main>
         {% block content %}
@@ -117,12 +121,99 @@
         </div>
     </div>
 
+    <!-- Модалка авторизації -->
+    <div class="modal" id="authModal">
+      <div class="modal-content auth-modal-content">
+
+        <span class="close-btn" id="closeAuthModal">&times;</span>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="loginTab">{% trans "Вхід" %}</button>
+          <button class="auth-tab" data-tab="registerTab">{% trans "Реєстрація" %}</button>
+        </div>
+
+        <!-- LOGIN -->
+        <div class="auth-tab-content active" id="loginTab">
+          <form id="loginForm" method="post" action="{% url 'account_api:login' %}">
+            {% csrf_token %}
+
+            <div class="form-group required-field">
+              <input type="text" name="username" required autocomplete="username" placeholder="{% trans 'Логін або email' %}">
+              <label>{% trans "Логін / Email" %}</label>
+            </div>
+
+            <div class="form-group required-field">
+              <input type="password" name="password" required autocomplete="current-password" placeholder="{% trans 'Пароль' %}">
+              <label>{% trans "Пароль" %}</label>
+              <small class="error-message" id="passwordError"></small>
+            </div>
+
+            <button type="submit" id="loginSubmit">{% trans "Увійти" %}</button>
+          </form>
+        </div>
+
+        <!-- REGISTER -->
+        <div class="auth-tab-content" id="registerTab">
+          <form id="registerForm" method="post" action="{% url 'account_api:register' %}">
+            {% csrf_token %}
+
+            <div class="form-group required-field">
+              <input type="text" name="username" required placeholder="{% trans 'Логін' %}">
+              <label>{% trans "Логін" %}</label>
+              <small class="error-message" id="usernameError"></small>
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="first_name" autocomplete="first_name" placeholder="{% trans "Ім'я" %}">
+              <label>{% trans "Ім'я" %}</label>
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="last_name" autocomplete="last_name" placeholder="{% trans 'Фамілія' %}">
+              <label>{% trans "Фамілія" %}</label>
+            </div>
+
+            <div class="form-group required-field">
+              <input type="email" name="email" required autocomplete="email" placeholder="{% trans 'Email' %}">
+              <label>Email</label>
+              <small class="error-message" id="emailError"></small>
+            </div>
+
+            <div class="form-group required-field">
+              <input type="password" name="password1" required autocomplete="new-password" placeholder="{% trans 'Пароль' %}">
+              <label>{% trans "Пароль" %}</label>
+            </div>
+
+            <div class="form-group required-field">
+              <input type="password" name="password2" required autocomplete="new-password" placeholder="{% trans 'Повторіть пароль' %}">
+              <label>{% trans "Повторіть пароль" %}</label>
+              <small class="error-message" id="passwordRegError"></small>
+            </div>
+
+            <button type="submit">{% trans "Зареєструватись" %}</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
     <!-- JS -->
-    <script>const STATIC_URL = "{% static '' %}";</script>
+    <script>
+      window.API_URLS = {
+        static: "{% static '' %}",
+        login: "{% url 'account_api:login' %}",
+        register: "{% url 'account_api:register' %}",
+        profileUpdate: "{% url 'account_api:profile_update' %}",
+        profileChangePassword: "{% url 'account_api:profile_change_password' %}"
+      };
+    </script>
     <script src="{% url 'cinema:javascript-catalog' %}"></script>
+    <script type="module" src="{% static 'js/modalManager.js' %}"></script>
     <script type="module" src="{% static 'cinema/js/main.js' %}" defer></script>
     <script type="module" src="{% static 'cinema/js/modal-video.js' %}" defer></script>
     <script type="module" src="{% static 'cinema/js/cart.js' %}" defer></script>
+    <script type="module" src="{% static 'accounts/js/authorization.js' %}"></script>
+    <script type="module" src="{% static 'accounts/js/profile.js' %}"></script>
 
     {% block extra_scripts %}{% endblock %}
 </body>

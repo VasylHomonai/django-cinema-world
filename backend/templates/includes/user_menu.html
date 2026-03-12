@@ -1,0 +1,33 @@
+{% load static i18n %}
+
+{% if request.user.is_authenticated %}
+
+<div class="user-button">
+    <button class="user-link">
+        <img src="{% static 'accounts/images/user-icon-auth.jpg' %}" alt="Profile">
+        <span class="user-tooltip" title="{{ request.user.username }}">
+            {{ request.user.username }}
+        </span>
+    </button>
+    <ul class="user-menu">
+        <li><a href="{% url 'account:profile' %}">{% trans "Профіль" %}</a></li>
+        <li><a href="{% url 'account:orders' %}">{% trans "Мої замовлення" %}</a></li>
+        <li><form method="post" action="{% url 'account_api:logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button type="submit">{% trans "Вийти" %}</button>
+        </form></li>
+    </ul>
+</div>
+
+{% else %}
+
+<div id="userButton" class="user-button">
+    <img src="{% static 'accounts/images/user-icon.webp' %}" alt="{% trans 'Увійти/Зареєструватись' %}">
+    <span class="user-tooltip">
+        <span class="nowrap">{% trans "Увійти /" %}</span>
+        <span class="break"></span>
+        <span class="nowrap">{% trans "Зареєструватись" %}</span>
+    </span>
+</div>
+
+{% endif %}
