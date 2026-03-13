@@ -110,8 +110,13 @@ async function saveField(container) {
         }
 
     } catch (error) {
-        console.error("Network error during profile update:", error);
-        showToast(gettext("Помилка мережі"));
+        console.error("Profile update error:", error);
+
+        if (error.message) {
+            showToast(error.message);
+        } else {
+            showToast(gettext("Помилка мережі"));
+        }
     } finally {
         // restore button
         saveBtn.innerHTML = originalIcon;

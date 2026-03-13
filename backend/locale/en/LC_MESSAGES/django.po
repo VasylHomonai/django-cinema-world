@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-12 01:20+0200\n"
+"POT-Creation-Date: 2026-03-13 03:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,52 +22,63 @@ msgstr ""
 msgid "Номер телефону має бути у форматі +380XXXXXXXXX або 0XXXXXXXXX"
 msgstr "Phone number must be in the format +380XXXXXXXXX or 0XXXXXXXXX"
 
-#: accounts/forms.py:22 accounts/templates/accounts/profile.html:33
-#: templates/base.html:79
-msgid "Телефон"
-msgstr "Phone"
+#: accounts/forms.py:51
+msgid "Nickname не може бути порожнім"
+msgstr "Nickname cannot be empty"
 
-#: accounts/forms.py:40 accounts/templates/accounts/profile.html:26
+#: accounts/forms.py:54
+msgid "Цей нікнейм вже зайнятий"
+msgstr "This username is already taken"
+
+#: accounts/forms.py:65
+msgid "Email не може бути порожнім"
+msgstr "Email cannot be empty"
+
+#: accounts/forms.py:68
+msgid "Цей email вже використовується"
+msgstr "This email is already in use"
+
+#: accounts/forms.py:75 accounts/templates/accounts/profile.html:28
 #: templates/base.html:167 templates/base.html:168
 msgid "Ім'я"
 msgstr "First name"
 
-#: accounts/forms.py:41 accounts/templates/accounts/profile.html:28
+#: accounts/forms.py:76 accounts/templates/accounts/profile.html:30
 #: templates/base.html:172 templates/base.html:173
 msgid "Фамілія"
 msgstr "Last name"
 
-#: accounts/forms.py:51
+#: accounts/forms.py:86
 msgid "Користувач з таким нікнеймом вже існує"
 msgstr "A user with this username already exists"
 
-#: accounts/forms.py:58
+#: accounts/forms.py:93
 msgid "Користувач з таким email вже існує"
 msgstr "A user with this email already exists"
 
-#: accounts/forms.py:73 accounts/templates/accounts/profile.html:52
+#: accounts/forms.py:108 accounts/templates/accounts/profile.html:54
 msgid "Поточний пароль"
 msgstr "Current password"
 
-#: accounts/forms.py:78 accounts/templates/accounts/profile.html:59
+#: accounts/forms.py:113 accounts/templates/accounts/profile.html:61
 msgid "Новий пароль"
 msgstr "New password"
 
-#: accounts/forms.py:83
+#: accounts/forms.py:118
 msgid "Підтвердження нового пароля"
 msgstr "Confirm new password"
 
-#: accounts/templates/accounts/orders.html:12
-#: accounts/templates/accounts/profile.html:16
+#: accounts/templates/accounts/orders.html:14
+#: accounts/templates/accounts/profile.html:18
 #: cinema/templates/cinema/product_detail.html:16
 msgid "На головну"
 msgstr "Home"
 
-#: accounts/templates/accounts/orders.html:16
+#: accounts/templates/accounts/orders.html:18
 msgid "Мої замовлення:"
 msgstr "My orders:"
 
-#: accounts/templates/accounts/orders.html:18
+#: accounts/templates/accounts/orders.html:20
 msgid "Дана сторінка знаходиться у процесі розробки."
 msgstr "This page is under development."
 
@@ -82,57 +93,49 @@ msgstr ""
 "    Profile %(username)s\n"
 "  "
 
-#: accounts/templates/accounts/profile.html:20
+#: accounts/templates/accounts/profile.html:22
 msgid "Особиста інформація:"
 msgstr "Personal information:"
 
-#: accounts/templates/accounts/profile.html:35
+#: accounts/templates/accounts/profile.html:35 templates/base.html:79
+msgid "Телефон"
+msgstr "Phone"
+
+#: accounts/templates/accounts/profile.html:37
 msgid "Місто"
 msgstr "City"
 
-#: accounts/templates/accounts/profile.html:37
+#: accounts/templates/accounts/profile.html:39
 msgid "Адреса"
 msgstr "Address"
 
-#: accounts/templates/accounts/profile.html:43
+#: accounts/templates/accounts/profile.html:45
 msgid "Зміна паролю"
 msgstr "Change password"
 
-#: accounts/templates/accounts/profile.html:51
+#: accounts/templates/accounts/profile.html:53
 msgid "Введіть поточний пароль"
 msgstr "Current password"
 
-#: accounts/templates/accounts/profile.html:58
+#: accounts/templates/accounts/profile.html:60
 msgid "Введіть новий пароль"
 msgstr "New password"
 
-#: accounts/templates/accounts/profile.html:65
+#: accounts/templates/accounts/profile.html:67
 msgid "Повторіть новий пароль"
 msgstr "Repeat password"
 
-#: accounts/templates/accounts/profile.html:66
+#: accounts/templates/accounts/profile.html:68
 msgid "Підтвердження пароля"
 msgstr "Repeat password"
 
-#: accounts/templates/accounts/profile.html:70
+#: accounts/templates/accounts/profile.html:72
 msgid "Змінити пароль"
 msgstr "Change password"
 
-#: accounts/views.py:116
-msgid "Nickname не може бути порожнім"
-msgstr "Nickname cannot be empty"
-
-#: accounts/views.py:119
-msgid "Цей нікнейм вже зайнятий"
-msgstr "This username is already taken"
-
-#: accounts/views.py:124
-msgid "Email не може бути порожнім"
-msgstr "Email cannot be empty"
-
-#: accounts/views.py:127
-msgid "Цей email вже використовується"
-msgstr "This email is already in use"
+#: accounts/views.py:118 accounts/views.py:132
+msgid "Недійсне значення"
+msgstr ""
 
 #: cinema/templates/cinema/includes/product_actions.html:12
 msgid "Переглянути трейлер"

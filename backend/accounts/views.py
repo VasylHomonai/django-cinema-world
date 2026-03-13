@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 
-from .forms import RegisterForm, UserPasswordChangeForm, UserProfileForm
+from .forms import RegisterForm, UserPasswordChangeForm, UserProfileForm, UserUpdateForm
 
 User = get_user_model()
 
@@ -85,74 +85,57 @@ def profile_view(request):
 
 
 @login_required
+@require_POST
 def profile_update(request):
-    if request.method != "POST":
-        return JsonResponse({"status": "error", "message": "Invalid method"})
 
     try:
         data = json.loads(request.body)
-        field = data.get("field")
-        value = (data.get("value") or "").strip()
     except json.JSONDecodeError:
-        return JsonResponse({"status": "error", "message": "Invalid JSON"})
+        return JsonResponse({"status": "error", "message": "Invalid JSON"}, status=400)
+
+    field = data.get("field")
+    value = (data.get("value") or "").strip()
+
+    if not field:
+        return JsonResponse({"status": "error", "message": "Field required"}, status=400)
 
     user = request.user
     profile = user.profile
 
-    # Всі поля
-    user_fields = ["username", "first_name", "last_name", "email"]
-    profile_fields = ["phone", "city", "address"]
+    user_fields = ("username", "first_name", "last_name", "email")
+    profile_fields = ("phone", "city", "address")
 
-    # Поля User
+    # USER
     if field in user_fields:
-        current_value = getattr(user, field)
-
-        # якщо значення не змінилось
-        if value == current_value:
-            return JsonResponse({"status": "success", "value": current_value})
-
-        # перевірка унікальності username
-        if field == "username":
-            if not value:
-                return JsonResponse({"status": "error", "message": _("Nickname не може бути порожнім")})
-
-            if User.objects.filter(username__iexact=value).exclude(pk=user.pk).exists():
-                return JsonResponse({"status": "error", "message": _("Цей нікнейм вже зайнятий")})
-
-        # перевірка email
-        if field == "email":
-            if not value:
-                return JsonResponse({"status": "error", "message": _("Email не може бути порожнім")})
-
-            if User.objects.filter(email__iexact=value).exclude(pk=user.pk).exists():
-                return JsonResponse({"status": "error", "message": _("Цей email вже використовується")})
-
-        setattr(user, field, value)
-        user.save()
-        return JsonResponse({"status": "success", "value": getattr(user, field)})
-
-    # Поля UserProfile
-    elif field in profile_fields:
-        current_value = getattr(profile, field)
-
-        if value == current_value:
-            return JsonResponse({"status": "success", "value": current_value})
-
-        # Використовуємо форму для валідації (телефон regex, required=False)
-        form = UserProfileForm({field: value}, instance=profile)
+        form = UserUpdateForm(data={field: value}, instance=user)
 
         if form.is_valid():
-            form.save()
+            setattr(user, field, form.cleaned_data[field])
+            user.save(update_fields=[field])
+
+            return JsonResponse({"status": "success", "value": getattr(user, field)})
+
+        message = form.errors.get(field, [_("Недійсне значення")])[0]
+
+        return JsonResponse({"status": "error", "message": message}, status=400)
+
+    # PROFILE
+    elif field in profile_fields:
+        form = UserProfileForm(data={field: value}, instance=profile)
+
+        if form.is_valid():
+            setattr(profile, field, form.cleaned_data[field])
+            profile.save(update_fields=[field])
+
             return JsonResponse({"status": "success", "value": getattr(profile, field)})
 
-        else:
-            # Повертаємо першу помилку для поля
-            message = form.errors.get(field, ["Invalid value"])[0]
-            return JsonResponse({"status": "error", "message": message})
+        message = form.errors.get(field, [_("Недійсне значення")])[0]
+
+        return JsonResponse({"status": "error", "message": message}, status=400)
 
     # Невідоме поле
     else:
-        return JsonResponse({"status": "error", "message": "Unknown field"})
+        return JsonResponse({"status": "error", "message": "Unknown field"}, status=400)
 
 
 @login_required

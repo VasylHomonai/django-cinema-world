@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-11 21:41+0200\n"
+"POT-Creation-Date: 2026-03-13 03:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,17 +42,17 @@ msgstr "Saved"
 msgid "Не вдалося зберегти зміни"
 msgstr "Failed to save changes"
 
-#: accounts/static/accounts/js/profile.js:114
-#: accounts/static/accounts/js/profile.js:164
-#: accounts/static/accounts/js/profile.js:307
+#: accounts/static/accounts/js/profile.js:118
+#: accounts/static/accounts/js/profile.js:169
+#: accounts/static/accounts/js/profile.js:313
 msgid "Помилка мережі"
 msgstr "Network error"
 
-#: accounts/static/accounts/js/profile.js:155
+#: accounts/static/accounts/js/profile.js:160
 msgid "Поле очищено"
 msgstr "Field cleared"
 
-#: accounts/static/accounts/js/profile.js:159
+#: accounts/static/accounts/js/profile.js:164
 msgid "Щось пішло не так"
 msgstr "Something went wrong"
 

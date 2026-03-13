@@ -15,11 +15,19 @@ phone_validator = RegexValidator(
 )
 
 
-class UserProfileForm(forms.ModelForm):
+class PartialUpdateModelForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.required = False
+
+
+class UserProfileForm(PartialUpdateModelForm):
     phone = forms.CharField(
         validators=[phone_validator],
-        required=False,
-        label=_("Телефон")
+        required=False
     )
 
     class Meta:
@@ -27,12 +35,39 @@ class UserProfileForm(forms.ModelForm):
         fields = ["phone", "city", "address"]
 
 
-class UserForm(forms.ModelForm):
-    email = forms.EmailField(required=True, label="Email")
+class UserUpdateForm(PartialUpdateModelForm):
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "email"]
+        fields = ["username", "first_name", "last_name", "email"]
+
+    def clean_username(self):
+        if "username" not in self.data:
+            return self.instance.username
+
+        username = self.cleaned_data.get("username")
+
+        if not username:
+            raise forms.ValidationError(_("Nickname не може бути порожнім"))
+
+        if User.objects.filter(username__iexact=username).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError(_("Цей нікнейм вже зайнятий"))
+
+        return username
+
+    def clean_email(self):
+        if "email" not in self.data:
+            return self.instance.email
+
+        email = self.cleaned_data.get("email")
+
+        if not email:
+            raise forms.ValidationError(_("Email не може бути порожнім"))
+
+        if User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError(_("Цей email вже використовується"))
+
+        return email
 
 
 class RegisterForm(UserCreationForm):

@@ -26,11 +26,19 @@ export async function apiPost(url, data) {
         body: JSON.stringify(data)
     });
 
-    if (!response.ok) {
-        throw new Error("Request failed");
+    let result;
+
+    try {
+        result = await response.json();
+    } catch {
+        result = {message: "Server error"};
     }
 
-    return response.json();
+    if (!response.ok) {
+        throw result;
+    }
+
+    return result
 }
 
 
