@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-13 03:19+0200\n"
+"POT-Creation-Date: 2026-03-13 04:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,18 +55,6 @@ msgstr "A user with this username already exists"
 #: accounts/forms.py:93
 msgid "Користувач з таким email вже існує"
 msgstr "A user with this email already exists"
-
-#: accounts/forms.py:108 accounts/templates/accounts/profile.html:54
-msgid "Поточний пароль"
-msgstr "Current password"
-
-#: accounts/forms.py:113 accounts/templates/accounts/profile.html:61
-msgid "Новий пароль"
-msgstr "New password"
-
-#: accounts/forms.py:118
-msgid "Підтвердження нового пароля"
-msgstr "Confirm new password"
 
 #: accounts/templates/accounts/orders.html:14
 #: accounts/templates/accounts/profile.html:18
@@ -117,8 +105,16 @@ msgstr "Change password"
 msgid "Введіть поточний пароль"
 msgstr "Current password"
 
+#: accounts/templates/accounts/profile.html:54
+msgid "Поточний пароль"
+msgstr "Current password"
+
 #: accounts/templates/accounts/profile.html:60
 msgid "Введіть новий пароль"
+msgstr "New password"
+
+#: accounts/templates/accounts/profile.html:61
+msgid "Новий пароль"
 msgstr "New password"
 
 #: accounts/templates/accounts/profile.html:67
@@ -135,7 +131,11 @@ msgstr "Change password"
 
 #: accounts/views.py:118 accounts/views.py:132
 msgid "Недійсне значення"
-msgstr ""
+msgstr "Invalid value"
+
+#: accounts/views.py:151
+msgid "Пароль успішно змінено"
+msgstr "Password changed successfully"
 
 #: cinema/templates/cinema/includes/product_actions.html:12
 msgid "Переглянути трейлер"

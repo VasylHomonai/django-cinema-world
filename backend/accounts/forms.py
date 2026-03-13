@@ -104,18 +104,9 @@ class RegisterForm(UserCreationForm):
 
 
 class UserPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(
-        label=_("Поточний пароль"),
-        strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "current-password", "class": "form-control"})
-    )
-    new_password1 = forms.CharField(
-        label=_("Новий пароль"),
-        strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password", "class": "form-control"})
-    )
-    new_password2 = forms.CharField(
-        label=_("Підтвердження нового пароля"),
-        strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password", "class": "form-control"})
-    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+            field.widget.attrs["class"] = "form-control"

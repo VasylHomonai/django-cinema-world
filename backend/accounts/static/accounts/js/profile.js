@@ -284,6 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (changePasswordForm) {
         changePasswordForm.addEventListener("submit", async (e) => {
             e.preventDefault();
+
             clearPasswordErrors();
 
             const formData = new FormData(changePasswordForm);
@@ -298,6 +299,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     if (json.errors) {
                         for (const field in json.errors) {
+                            if (field === "__all__") {
+                                // non-field errors
+                                showToast(json.errors[field]);
+                                continue;
+                            }
+
                             const el = document.getElementById(`${field}Error`);
                             if (el) {
                                 el.textContent = json.errors[field];

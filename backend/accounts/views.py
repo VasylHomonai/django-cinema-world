@@ -10,7 +10,8 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 
-from .forms import RegisterForm, UserPasswordChangeForm, UserProfileForm, UserUpdateForm
+from .forms import (RegisterForm, UserPasswordChangeForm, UserProfileForm,
+                    UserUpdateForm)
 
 User = get_user_model()
 
@@ -139,23 +140,24 @@ def profile_update(request):
 
 
 @login_required
+@require_POST
 def profile_change_password(request):
-    if request.method != "POST":
-        return JsonResponse({"status": "error", "message": "Invalid method"})
-
     form = UserPasswordChangeForm(user=request.user, data=request.POST)
 
     if form.is_valid():
         form.save()
         # щоб сесія не обірвалась після зміни пароля
         update_session_auth_hash(request, request.user)
-        return JsonResponse({"status": "success", "message": "Пароль успішно змінено"})
+
+        return JsonResponse({"status": "success", "message": _("Пароль успішно змінено")})
 
     # Збираємо помилки для JSON
-    errors = {}
-    for field, msgs in form.errors.items():
-        errors[field] = msgs.get_json_data()[0]['message']  # беремо першу помилку
-    return JsonResponse({"status": "error", "errors": errors})
+    errors = {
+        field: msgs[0]["message"]
+        for field, msgs in form.errors.get_json_data().items()
+    }
+
+    return JsonResponse({"status": "error", "errors": errors}, status=400)
 
 
 @login_required

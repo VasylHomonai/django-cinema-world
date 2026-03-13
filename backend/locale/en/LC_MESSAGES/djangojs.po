@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-13 03:19+0200\n"
+"POT-Creation-Date: 2026-03-13 04:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr "Failed to save changes"
 
 #: accounts/static/accounts/js/profile.js:118
 #: accounts/static/accounts/js/profile.js:169
-#: accounts/static/accounts/js/profile.js:313
+#: accounts/static/accounts/js/profile.js:320
 msgid "Помилка мережі"
 msgstr "Network error"
 

@@ -52,9 +52,20 @@ export async function apiPostForm(url, formData) {
         body: formData
     });
 
+    let data;
+    try {
+        data = await response.json();
+    } catch {
+        throw new Error("Invalid JSON response");
+    }
+
+    if (!response.ok && response.status === 400) {
+        return data; // повертаємо JSON з помилками
+    }
+
     if (!response.ok) {
         throw new Error("Request failed");
     }
 
-    return response.json();
+    return data;
 }
