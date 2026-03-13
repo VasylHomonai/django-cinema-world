@@ -65,9 +65,17 @@ class UserUpdateForm(PartialUpdateModelForm):
             raise forms.ValidationError(_("Email не може бути порожнім"))
 
         if User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError(_("Цей email вже використовується"))
+            raise forms.ValidationError(_("Користувач з таким email вже існує"))
 
         return email
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Username or Email", max_length=150)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+
+    def clean_username(self):
+        return self.cleaned_data["username"].strip()
 
 
 class RegisterForm(UserCreationForm):
@@ -83,7 +91,7 @@ class RegisterForm(UserCreationForm):
         username = self.cleaned_data["username"]
         # перевірка на унікальність незалежно від регістру
         if User.objects.filter(username__iexact=username).exists():
-            raise forms.ValidationError(_("Користувач з таким нікнеймом вже існує"))
+            raise forms.ValidationError(_("Цей нікнейм вже зайнятий"))
 
         return username
 

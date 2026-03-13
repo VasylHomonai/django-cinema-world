@@ -10,7 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_POST
 
-from .forms import (RegisterForm, UserPasswordChangeForm, UserProfileForm,
+from .forms import (LoginForm, RegisterForm, UserPasswordChangeForm, UserProfileForm,
                     UserUpdateForm)
 
 User = get_user_model()
@@ -19,34 +19,22 @@ User = get_user_model()
 # Create your views here.
 @require_POST
 def login_view(request):
-    try:
-        data = json.loads(request.body)
-        username = data.get("username", "").strip()
-        password = data.get("password")
-    except json.JSONDecodeError:
-        username = request.POST.get("username", "").strip()
-        password = request.POST.get("password")
+    form = LoginForm(request.POST)
 
-    user_obj = User.objects.filter(
-        Q(username__iexact=username) | Q(email__iexact=username)
-    ).first()
+    if not form.is_valid():
+        return JsonResponse({"status": "error", "message": "Invalid credentials"}, status=400)
 
-    if not user_obj:
-        return JsonResponse({"status": "no_user", "username": username})
+    username = form.cleaned_data["username"]
+    password = form.cleaned_data["password"]
 
-    user = authenticate(request, username=user_obj.username, password=password)
+    # Використання кастомного бекенду
+    user = authenticate(request, username=username, password=password)
 
-    if user:
-        login(request, user)
+    if user is None:
+        return JsonResponse({"status": "error", "message": "Invalid credentials"}, status=400)
 
-        return JsonResponse({
-            "status": "success",
-            "redirect_url": reverse("account:profile")
-        })
-
-    return JsonResponse({
-        "status": "wrong_password"
-    })
+    login(request, user)
+    return JsonResponse({"status": "success", "redirect_url": reverse("account:profile")})
 
 
 @require_POST

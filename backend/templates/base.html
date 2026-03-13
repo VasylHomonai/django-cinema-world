@@ -138,7 +138,7 @@
             {% csrf_token %}
 
             <div class="form-group required-field">
-              <input type="text" name="username" required autocomplete="username" placeholder="{% trans 'Логін або email' %}">
+              <input type="text" name="username" required autocomplete="username" placeholder="{% trans 'Логін або email' %}" inputmode="email">
               <label>{% trans "Логін / Email" %}</label>
             </div>
 

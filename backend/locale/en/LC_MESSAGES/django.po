@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-13 04:27+0200\n"
+"POT-Creation-Date: 2026-03-13 19:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Phone number must be in the format +380XXXXXXXXX or 0XXXXXXXXX"
 msgid "Nickname не може бути порожнім"
 msgstr "Nickname cannot be empty"
 
-#: accounts/forms.py:54
+#: accounts/forms.py:54 accounts/forms.py:94
 msgid "Цей нікнейм вже зайнятий"
 msgstr "This username is already taken"
 
@@ -34,27 +34,19 @@ msgstr "This username is already taken"
 msgid "Email не може бути порожнім"
 msgstr "Email cannot be empty"
 
-#: accounts/forms.py:68
-msgid "Цей email вже використовується"
-msgstr "This email is already in use"
+#: accounts/forms.py:68 accounts/forms.py:102
+msgid "Користувач з таким email вже існує"
+msgstr "A user with this email already exists"
 
-#: accounts/forms.py:75 accounts/templates/accounts/profile.html:28
+#: accounts/forms.py:83 accounts/templates/accounts/profile.html:28
 #: templates/base.html:167 templates/base.html:168
 msgid "Ім'я"
 msgstr "First name"
 
-#: accounts/forms.py:76 accounts/templates/accounts/profile.html:30
+#: accounts/forms.py:84 accounts/templates/accounts/profile.html:30
 #: templates/base.html:172 templates/base.html:173
 msgid "Фамілія"
 msgstr "Last name"
-
-#: accounts/forms.py:86
-msgid "Користувач з таким нікнеймом вже існує"
-msgstr "A user with this username already exists"
-
-#: accounts/forms.py:93
-msgid "Користувач з таким email вже існує"
-msgstr "A user with this email already exists"
 
 #: accounts/templates/accounts/orders.html:14
 #: accounts/templates/accounts/profile.html:18
@@ -129,11 +121,11 @@ msgstr "Repeat password"
 msgid "Змінити пароль"
 msgstr "Change password"
 
-#: accounts/views.py:118 accounts/views.py:132
+#: accounts/views.py:101 accounts/views.py:115
 msgid "Недійсне значення"
 msgstr "Invalid value"
 
-#: accounts/views.py:151
+#: accounts/views.py:134
 msgid "Пароль успішно змінено"
 msgstr "Password changed successfully"
 

@@ -1,5 +1,5 @@
 import { setupModal } from '/static/js/modalManager.js';
-import { apiPost, apiPostForm } from './utils.js';
+import { apiPostForm } from './utils.js';
 
 const userButton = document.getElementById("userButton");
 const authModal = document.getElementById("authModal");
@@ -53,14 +53,12 @@ function clearFieldError(fieldName) {
 }
 
 
-function switchToRegisterTab() {
-    // видаляємо клас active у всіх вкладках
-    tabs.forEach(t => t.classList.remove("active"));
-    tabContents.forEach(c => c.classList.remove("active"));
+// Обрізання пробілів на полях input
+function setupTrimField(field) {
+    if (!field) return;
 
-    // робимо активною вкладку реєстрації
-    document.querySelector('[data-tab="registerTab"]').classList.add("active");
-    document.getElementById("registerTab").classList.add("active");
+    field.addEventListener("input", e => { e.target.value = e.target.value.trimStart(); });
+    field.addEventListener("blur", e => { e.target.value = e.target.value.trim(); });
 }
 
 
@@ -107,25 +105,15 @@ loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     clearErrors();
 
-    const username = loginForm.username.value.trim();
-    const password = loginForm.password.value;
+    const formData = new FormData(loginForm);
 
-    const data = await apiPost(API_URLS.login, { username, password });
+    const data = await apiPostForm(API_URLS.login, formData);
 
-    if (data.status === "no_user") {
-        switchToRegisterTab();
-        if (username.includes("@")) {
-            const input = registerForm.email;
-            input.value = data.username.trim();
-            input.dispatchEvent(new Event("input"));
-        } else {
-            const input = registerForm.username;
-            input.value = data.username.trim();
-            input.dispatchEvent(new Event("input"));
-        }
-    } else if (data.status === "wrong_password") {
-        showError("passwordError", gettext("Невірний пароль."));
-    } else if (data.status === "success") {
+    if (data.status === "error") {
+        showError("passwordError", gettext("Невірний логін або пароль"));
+    }
+
+    if (data.status === "success") {
         authModal.style.display = "none";
         window.location.href = data.redirect_url;
     }
@@ -182,37 +170,10 @@ registerForm.querySelectorAll("input").forEach(input => {
     });
 });
 
-registerForm.username.addEventListener("input", e => {
-    e.target.value = e.target.value.trimStart(); // Обрізання пробілів у полі username на початку
-});
-registerForm.username.addEventListener("blur", e => {
-    e.target.value = e.target.value.trim(); // Обрізання пробілів у полі username в кінці
-});
 
-registerForm.email.addEventListener("input", e => {
-    e.target.value = e.target.value.trimStart(); // Обрізання пробілів у полі email на початку
-});
-registerForm.email.addEventListener("blur", e => {
-    e.target.value = e.target.value.trim(); // Обрізання пробілів у полі email в кінці
-});
-
-// Обрізання пробілів у полі first_name
-registerForm.first_name.addEventListener("input", e => {
-    e.target.value = e.target.value.trimStart();
-});
-
-registerForm.first_name.addEventListener("blur", e => {
-    e.target.value = e.target.value.trim();
-});
-
-// Обрізання пробілів у полі last_name
-registerForm.last_name.addEventListener("input", e => {
-    e.target.value = e.target.value.trimStart();
-});
-
-registerForm.last_name.addEventListener("blur", e => {
-    e.target.value = e.target.value.trim();
-});
+// Обрізання пробілів у заданих полях на початку та в кінці
+[registerForm.username, registerForm.email, registerForm.first_name, registerForm.last_name]
+    .forEach(setupTrimField);
 
 
 // Переключення вкладок

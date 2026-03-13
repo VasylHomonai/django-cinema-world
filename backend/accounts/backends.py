@@ -10,8 +10,11 @@ class UsernameOrEmailBackend(ModelBackend):
     Аутентифікація користувача за логіном або email
     """
     def authenticate(self, request, username=None, password=None, **kwargs):
+        if username is None or password is None:
+            return None
+
         # Беремо першого користувача, який співпадає по username або email
-        user = User.objects.filter(Q(username=username) | Q(email=username)).first()
+        user = User.objects.filter(Q(username__iexact=username) | Q(email__iexact=username)).first()
 
         if user and user.check_password(password) and self.user_can_authenticate(user):
             return user
