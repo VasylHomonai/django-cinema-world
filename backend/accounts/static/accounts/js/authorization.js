@@ -1,5 +1,5 @@
 import { setupModal } from '/static/js/modalManager.js';
-import { apiPost } from './utils.js';
+import { apiPost, apiPostForm } from './utils.js';
 
 const userButton = document.getElementById("userButton");
 const authModal = document.getElementById("authModal");
@@ -134,32 +134,23 @@ loginForm.addEventListener("submit", async (e) => {
 // Реєстрація користувача
 registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     clearErrors();
 
-    const username = registerForm.username.value.trim();
-    const email = registerForm.email.value.trim();
-    const first_name = registerForm.first_name.value.trim();
-    const last_name = registerForm.last_name.value.trim();
-    const password1 = registerForm.password1.value;
-    const password2 = registerForm.password2.value;
+    const formData = new FormData(e.target);
 
-    const data = await apiPost(API_URLS.register, {
-        username,
-        email,
-        first_name,
-        last_name,
-        password1,
-        password2
-    });
+    const data = await apiPostForm(API_URLS.register, formData);
 
     if (data.status === "error") {
         for (const field in data.errors) {
             let elId;
+
             if (field === "password1" || field === "password2") {
                 elId = "passwordRegError";
             } else {
                 elId = field + "Error";
             }
+
             showError(elId, data.errors[field]);
         }
     } else if (data.status === "success") {

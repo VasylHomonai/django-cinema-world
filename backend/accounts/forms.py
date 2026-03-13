@@ -71,7 +71,7 @@ class UserUpdateForm(PartialUpdateModelForm):
 
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(label="Email", required=True)
     first_name = forms.CharField(label=_("Ім'я"), required=False)
     last_name = forms.CharField(label=_("Фамілія"), required=False)
 
@@ -80,26 +80,31 @@ class RegisterForm(UserCreationForm):
         fields = ("username", "first_name", "last_name", "email", "password1", "password2")
 
     def clean_username(self):
-        username = self.cleaned_data["username"].strip()
+        username = self.cleaned_data["username"]
         # перевірка на унікальність незалежно від регістру
         if User.objects.filter(username__iexact=username).exists():
             raise forms.ValidationError(_("Користувач з таким нікнеймом вже існує"))
+
         return username
 
     def clean_email(self):
-        email = self.cleaned_data["email"].strip().lower()
+        email = self.cleaned_data["email"].lower()
 
-        if User.objects.filter(email=email).exists():
+        if User.objects.filter(email__iexact=email).exists():
             raise forms.ValidationError(_("Користувач з таким email вже існує"))
+
         return email
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data["email"].lower()
-        user.first_name = self.cleaned_data["first_name"]
-        user.last_name = self.cleaned_data["last_name"]
+
+        user.email = self.cleaned_data["email"]
+        user.first_name = self.cleaned_data.get("first_name", "")
+        user.last_name = self.cleaned_data.get("last_name", "")
+
         if commit:
             user.save()
+
         return user
 
 

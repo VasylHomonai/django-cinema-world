@@ -51,27 +51,21 @@ def login_view(request):
 
 @require_POST
 def register_view(request):
-    data = json.loads(request.body)
+    form = RegisterForm(request.POST)
 
-    # Видаляємо пробіли з username та email
-    clean_data = {
-        "username": data.get("username", "").strip(),
-        "email": data.get("email", "").strip(),
-        "first_name": data.get("first_name", "").strip(),
-        "last_name": data.get("last_name", "").strip(),
-        "password1": data.get("password1", ""),
-        "password2": data.get("password2", "")
-    }
-
-    form = RegisterForm(clean_data)
     if form.is_valid():
         user = form.save()
         login(request, user)
+
         return JsonResponse({"status": "success", "redirect_url": reverse("account:profile")})
 
     # Якщо помилка, повертаємо JSON із полями помилок
-    errors = {field: error[0] for field, error in form.errors.items()}
-    return JsonResponse({"status": "error", "errors": errors})
+    errors = {
+        field: msgs[0]["message"]
+        for field, msgs in form.errors.get_json_data().items()
+    }
+
+    return JsonResponse({"status": "error", "errors": errors}, status=400)
 
 
 @require_POST
