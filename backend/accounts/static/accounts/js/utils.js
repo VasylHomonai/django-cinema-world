@@ -19,6 +19,7 @@ function getCookie(name) {
 export async function apiPost(url, data) {
     const response = await fetch(url, {
         method: "POST",
+        credentials: "same-origin",
         headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": getCookie("csrftoken")
@@ -46,6 +47,7 @@ export async function apiPost(url, data) {
 export async function apiPostForm(url, formData) {
     const response = await fetch(url, {
         method: "POST",
+        credentials: "same-origin",
         headers: {
             "X-CSRFToken": getCookie("csrftoken")
         },
@@ -59,12 +61,8 @@ export async function apiPostForm(url, formData) {
         throw new Error("Invalid JSON response");
     }
 
-    if (!response.ok && response.status === 400) {
-        return data; // повертаємо JSON з помилками
-    }
-
     if (!response.ok) {
-        throw new Error("Request failed");
+        return data; // повертаємо JSON з помилками
     }
 
     return data;

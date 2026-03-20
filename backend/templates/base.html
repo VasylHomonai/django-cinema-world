@@ -138,14 +138,17 @@
             {% csrf_token %}
 
             <div class="form-group required-field">
-              <input type="text" name="username" required autocomplete="username" placeholder="{% trans 'Логін або email' %}" inputmode="email">
+              <input type="text" name="username" required autocomplete="username"
+                     placeholder="{% trans 'Логін або email' %}" inputmode="email">
               <label>{% trans "Логін / Email" %}</label>
+              <small class="error-message"></small>
             </div>
 
             <div class="form-group required-field">
-              <input type="password" name="password" required autocomplete="current-password" placeholder="{% trans 'Пароль' %}">
+              <input type="password" name="password" required autocomplete="current-password"
+                     placeholder="{% trans 'Пароль' %}">
               <label>{% trans "Пароль" %}</label>
-              <small class="error-message" id="passwordError"></small>
+              <small class="error-message"></small>
             </div>
 
             <button type="submit" id="loginSubmit">{% trans "Увійти" %}</button>
@@ -160,7 +163,7 @@
             <div class="form-group required-field">
               <input type="text" name="username" required placeholder="{% trans 'Логін' %}">
               <label>{% trans "Логін" %}</label>
-              <small class="error-message" id="usernameError"></small>
+              <small class="error-message"></small>
             </div>
 
             <div class="form-group">
@@ -176,18 +179,19 @@
             <div class="form-group required-field">
               <input type="email" name="email" required autocomplete="email" placeholder="{% trans 'Email' %}">
               <label>Email</label>
-              <small class="error-message" id="emailError"></small>
+              <small class="error-message"></small>
             </div>
 
             <div class="form-group required-field">
               <input type="password" name="password1" required autocomplete="new-password" placeholder="{% trans 'Пароль' %}">
               <label>{% trans "Пароль" %}</label>
+              <small class="error-message"></small>
             </div>
 
             <div class="form-group required-field">
               <input type="password" name="password2" required autocomplete="new-password" placeholder="{% trans 'Повторіть пароль' %}">
               <label>{% trans "Повторіть пароль" %}</label>
-              <small class="error-message" id="passwordRegError"></small>
+              <small class="error-message"></small>
             </div>
 
             <button type="submit">{% trans "Зареєструватись" %}</button>
@@ -204,7 +208,8 @@
         login: "{% url 'account_api:login' %}",
         register: "{% url 'account_api:register' %}",
         profileUpdate: "{% url 'account_api:profile_update' %}",
-        profileChangePassword: "{% url 'account_api:profile_change_password' %}"
+        profileChangePassword: "{% url 'account_api:profile_change_password' %}",
+        logout: "{% url 'account_api:logout' %}"
       };
     </script>
     <script src="{% url 'cinema:javascript-catalog' %}"></script>
@@ -214,6 +219,7 @@
     <script type="module" src="{% static 'cinema/js/cart.js' %}" defer></script>
     <script type="module" src="{% static 'accounts/js/authorization.js' %}"></script>
     <script type="module" src="{% static 'accounts/js/profile.js' %}"></script>
+    <script type="module" src="{% static 'accounts/js/postActions.js' %}"></script>
 
     {% block extra_scripts %}{% endblock %}
 </body>

@@ -14,6 +14,19 @@ body {
     min-height: 100vh;
 }
 
+body.loading {
+    cursor: wait;
+    pointer-events: none;
+}
+
+body.loading::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.6);
+    z-index: 999;
+}
+
 header, footer {
     background-color: #004466;
     color: white;

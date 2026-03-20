@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-13 19:07+0200\n"
+"POT-Creation-Date: 2026-03-20 22:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/decorators.py:26
+msgid "Сервіс тимчасово недоступний. Спробуйте пізніше."
+msgstr "Internal server error. Please try later."
+
+#: accounts/decorators.py:36
+msgid "Сталася неочікувана помилка"
+msgstr "An unexpected error occurred"
 
 #: accounts/forms.py:14
 msgid "Номер телефону має бути у форматі +380XXXXXXXXX або 0XXXXXXXXX"
@@ -39,12 +47,12 @@ msgid "Користувач з таким email вже існує"
 msgstr "A user with this email already exists"
 
 #: accounts/forms.py:83 accounts/templates/accounts/profile.html:28
-#: templates/base.html:167 templates/base.html:168
+#: templates/base.html:170 templates/base.html:171
 msgid "Ім'я"
 msgstr "First name"
 
 #: accounts/forms.py:84 accounts/templates/accounts/profile.html:30
-#: templates/base.html:172 templates/base.html:173
+#: templates/base.html:175 templates/base.html:176
 msgid "Фамілія"
 msgstr "Last name"
 
@@ -121,11 +129,27 @@ msgstr "Repeat password"
 msgid "Змінити пароль"
 msgstr "Change password"
 
-#: accounts/views.py:101 accounts/views.py:115
+#: accounts/views.py:56
+msgid "Невірний логін або пароль"
+msgstr "Incorrect username or password"
+
+#: accounts/views.py:138
+msgid "Некоректні дані запиту"
+msgstr "Invalid request data"
+
+#: accounts/views.py:150
+msgid "Обов'язкове поле"
+msgstr "Field required"
+
+#: accounts/views.py:174 accounts/views.py:202
 msgid "Недійсне значення"
 msgstr "Invalid value"
 
-#: accounts/views.py:134
+#: accounts/views.py:223
+msgid "Неможливо оновити це поле"
+msgstr "Unable to update this field"
+
+#: accounts/views.py:243
 msgid "Пароль успішно змінено"
 msgstr "Password changed successfully"
 
@@ -262,36 +286,36 @@ msgstr "Login"
 msgid "Реєстрація"
 msgstr "Register"
 
-#: templates/base.html:141
+#: templates/base.html:142
 msgid "Логін або email"
 msgstr "Username or email"
 
-#: templates/base.html:142
+#: templates/base.html:143
 msgid "Логін / Email"
 msgstr "Username / Email"
 
-#: templates/base.html:146 templates/base.html:147 templates/base.html:183
-#: templates/base.html:184
+#: templates/base.html:149 templates/base.html:150 templates/base.html:186
+#: templates/base.html:187
 msgid "Пароль"
 msgstr "Password"
 
-#: templates/base.html:151
+#: templates/base.html:154
 msgid "Увійти"
 msgstr "Sign in"
 
-#: templates/base.html:161 templates/base.html:162
+#: templates/base.html:164 templates/base.html:165
 msgid "Логін"
 msgstr "Username"
 
-#: templates/base.html:177
+#: templates/base.html:180
 msgid "Email"
 msgstr "Email"
 
-#: templates/base.html:188 templates/base.html:189
+#: templates/base.html:192 templates/base.html:193
 msgid "Повторіть пароль"
 msgstr "Repeat password"
 
-#: templates/base.html:193 templates/includes/user_menu.html:29
+#: templates/base.html:197 templates/includes/user_menu.html:29
 msgid "Зареєструватись"
 msgstr "Sign up"
 

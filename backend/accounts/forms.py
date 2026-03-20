@@ -72,7 +72,7 @@ class UserUpdateForm(PartialUpdateModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username or Email", max_length=150)
-    password = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password = forms.CharField(label="Password", widget=forms.PasswordInput, strip=False)
 
     def clean_username(self):
         return self.cleaned_data["username"].strip()

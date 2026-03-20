@@ -11,44 +11,63 @@ const tabContents = document.querySelectorAll(".auth-tab-content");
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
+const usernameInput = loginForm.querySelector("input[name='username']");
+
 // Ініціалізація модалки
 setupModal(authModal, userButton, closeAuthModal);
 
 
-function showError(elementId, message) {
-    const el = document.getElementById(elementId);
+// Показ помилок на полях форми
+export function showFieldErrors(form, errors) {
+    if (!errors) return;
 
-    if (el) {
-        el.textContent = message;
-        el.style.display = "block";
+    for (const [field, errs] of Object.entries(errors)) {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (!input) continue;
+
+        const errorEl = input.closest(".form-group")?.querySelector(".error-message");
+
+        if (errorEl) {
+            errorEl.textContent = errs.join(", ");
+            errorEl.style.display = "block";
+        }
+    }
+}
+
+
+// Показ загальної помилки у формі під певним полем
+function showFormError(form, message, inputName) {
+    const input = form.querySelector(`[name="${inputName}"]`);
+    if (!input) return;
+
+    const errorEl = input.closest(".form-group")?.querySelector(".error-message");
+
+    if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = "block";
     }
 }
 
 
 // Скидує всі помилки полів
-function clearErrors() {
-    document.querySelectorAll(".error-message").forEach(el => {
-        el.textContent = "";
-        el.style.display = "none";
-    });
+function clearErrorsForForm(form) {
+  form.querySelectorAll(".error-message").forEach(el => {
+    el.textContent = "";
+    el.style.display = "none";
+  });
 }
 
 
 // Скидує помилку для конкретного поля
-function clearFieldError(fieldName) {
-    let errorId;
+function clearFieldError(input) {
+    const formGroup = input.closest(".form-group");
+    if (!formGroup) return;
 
-    if (fieldName === "password1" || fieldName === "password2") {
-        errorId = "passwordRegError";
-    } else {
-        errorId = fieldName + "Error";
-    }
+    const errorEl = formGroup.querySelector(".error-message");
 
-    const el = document.getElementById(errorId);
-
-    if (el) {
-        el.textContent = "";
-        el.style.display = "none";
+    if (errorEl) {
+        errorEl.textContent = "";
+        errorEl.style.display = "none";
     }
 }
 
@@ -103,19 +122,30 @@ document.querySelectorAll("input[placeholder]").forEach(input => {
 // Авторизація користувача
 loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    clearErrors();
+    clearErrorsForForm(loginForm);
 
     const formData = new FormData(loginForm);
 
-    const data = await apiPostForm(API_URLS.login, formData);
+    let data;
+    try {
+        data = await apiPostForm(API_URLS.login, formData);
 
-    if (data.status === "error") {
-        showError("passwordError", gettext("Невірний логін або пароль"));
-    }
+        if (data.status === "error") {
+            // Помилки по полях
+            showFieldErrors(loginForm, data.errors);
 
-    if (data.status === "success") {
-        authModal.style.display = "none";
-        window.location.href = data.redirect_url;
+            // Загальна помилка
+            if (data.message) {
+                showFormError(loginForm, data.message, "password");
+            }
+        }
+
+        if (data.status === "success") {
+            authModal.style.display = "none";
+            window.location.href = data.redirect_url;
+        }
+    } catch (err) {
+        showFormError(loginForm, gettext("Сервіс тимчасово недоступний. Спробуйте пізніше."), "password");
     }
 });
 
@@ -123,26 +153,27 @@ loginForm.addEventListener("submit", async (e) => {
 registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    clearErrors();
+    clearErrorsForForm(registerForm);
 
     const formData = new FormData(e.target);
 
-    const data = await apiPostForm(API_URLS.register, formData);
+    let data;
+    try {
+        const data = await apiPostForm(API_URLS.register, formData);
 
-    if (data.status === "error") {
-        for (const field in data.errors) {
-            let elId;
+        if (data.status === "error") {
+            // Помилки по полях
+            showFieldErrors(registerForm, data.errors);
 
-            if (field === "password1" || field === "password2") {
-                elId = "passwordRegError";
-            } else {
-                elId = field + "Error";
+            // Якщо є загальна помилка повторного пароля
+            if (data.errors.password2) {
+                showFormError(registerForm, data.errors.password2, "password2");
             }
-
-            showError(elId, data.errors[field]);
+        } else if (data.status === "success") {
+            window.location.href = data.redirect_url;
         }
-    } else if (data.status === "success") {
-        window.location.href = data.redirect_url;
+    } catch (err) {
+        showFormError(registerForm, gettext("Сервіс тимчасово недоступний. Спробуйте пізніше."), "password2");
     }
 });
 
@@ -151,22 +182,18 @@ registerForm.addEventListener("submit", async (e) => {
 loginForm.querySelectorAll("input").forEach(input => {
     // Очищення помилки відповідного поля при зміні значення
     input.addEventListener("input", () => {
-        clearFieldError(input.name);
+        clearFieldError(input);
     });
 });
 
-loginForm.username.addEventListener("input", e => {
-    e.target.value = e.target.value.trimStart(); // Обрізання пробілів у полі username на початку
-});
-loginForm.username.addEventListener("blur", e => {
-    e.target.value = e.target.value.trim(); // Обрізання пробілів у полі username в кінці
-});
+// Обрізання пробілів у полі username на початку та в кінці
+setupTrimField(usernameInput);
 
 // Робота з полями для форми реєстрації
 registerForm.querySelectorAll("input").forEach(input => {
     // Очищення помилки відповідного поля при зміні значення
     input.addEventListener("input", () => {
-        clearFieldError(input.name);
+        clearFieldError(input);
     });
 });
 

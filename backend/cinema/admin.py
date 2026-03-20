@@ -50,7 +50,7 @@ class ProductAdmin(AuthorRestrictedAdminMixin, admin.ModelAdmin):
     list_filter = ('author',)
     search_fields = ('translations__name',)
     inlines = [ProductTranslationInline]
-    list_display_links = ("name_uk",)
+    list_display_links = ("id", "name_uk")
     actions = ['activate_products', 'deactivate_products']
 
     def name_uk(self, obj):

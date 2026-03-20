@@ -1,7 +1,8 @@
 import { apiPost, apiPostForm } from './utils.js';
+import { showFieldErrors } from './authorization.js';
 
 
-function showToast(message) {
+export function showToast(message) {
     let old = document.querySelector(".toast-message");
     if (old) old.remove();
 
@@ -20,8 +21,7 @@ function showToast(message) {
 function handleSave(container) {
     const input = container.querySelector(".edit-input");
 
-    const rawValue = input.value;
-    const value = rawValue.trim();
+    const value = input.value.trim();
     const oldValue = (input.dataset.originalValue || "").trim();
 
     // синхронізуємо input одразу
@@ -62,9 +62,9 @@ async function saveField(container) {
 
     // Забороняємо збереження порожнього username або email
     if ((field === "username" || field === "email") && trimmedValue === "") {
-        showToast(gettext(field === "username"
+        showToast(field === "username"
             ? gettext("Nickname не може бути порожнім")
-            : gettext("Email не може бути порожнім")));
+            : gettext("Email не може бути порожнім"));
         container.dataset.saving = "false";
         return;
     }
@@ -100,8 +100,6 @@ async function saveField(container) {
             showToast(gettext("Збережено"));
 
         } else {
-            console.error("Profile update error:", data);
-
             if (data.message) {
                 showToast(data.message);
             } else {
@@ -110,8 +108,6 @@ async function saveField(container) {
         }
 
     } catch (error) {
-        console.error("Profile update error:", error);
-
         if (error.message) {
             showToast(error.message);
         } else {
@@ -160,13 +156,15 @@ async function handleDelete(container) {
             showToast(gettext("Поле очищено"));
 
         } else {
-            console.error("Error clearing field:", data);
             showToast(gettext("Щось пішло не так"));
         }
 
     } catch (err) {
-        console.error("Request failed:", err);
-        showToast(gettext("Помилка мережі"));
+        if (err?.message) {
+            showToast(err.message);
+        } else {
+            showToast(gettext("Помилка мережі"));
+        }
     }
 }
 
@@ -290,33 +288,29 @@ document.addEventListener("DOMContentLoaded", () => {
             const formData = new FormData(changePasswordForm);
 
             try {
-                const json = await apiPostForm(API_URLS.profileChangePassword, formData);;
+                const json = await apiPostForm(API_URLS.profileChangePassword, formData);
 
                 if (json.status === "success") {
                     showToast(json.message);
                     changePasswordForm.reset();
+                    clearPasswordErrors();
                 } else if (json.status === "error") {
 
                     if (json.errors) {
-                        for (const field in json.errors) {
-                            if (field === "__all__") {
-                                // non-field errors
-                                showToast(json.errors[field]);
-                                continue;
-                            }
+                        const { __all__, ...fieldErrors } = json.errors;
 
-                            const el = document.getElementById(`${field}Error`);
-                            if (el) {
-                                el.textContent = json.errors[field];
-                                el.style.display = "block";
-                            }
+                        // помилки під полями
+                        showFieldErrors(changePasswordForm, fieldErrors);
+
+                        // загальні помилки
+                        if (__all__) {
+                            showToast(__all__.join(", "));
                         }
-                    } else if (json.message) {
-                        showToast(json.message);
-                    }
+                    } else
+                        // fallback (якщо бек повернув тільки message)
+                        showToast(json.message || gettext("Щось пішло не так"));
                 }
             } catch (err) {
-                console.error(err);
                 showToast(gettext("Помилка мережі"));
             }
         });

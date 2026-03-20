@@ -15,6 +15,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from .logging import LOGGING as PROJECT_LOGGING
+
+LOGGING = PROJECT_LOGGING
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

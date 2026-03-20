@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-13 18:38+0200\n"
+"POT-Creation-Date: 2026-03-20 22:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: accounts/static/accounts/js/authorization.js:113
-msgid "Невірний логін або пароль"
-msgstr "Incorrect username or password"
+#: accounts/static/accounts/js/authorization.js:148
+#: accounts/static/accounts/js/authorization.js:176
+msgid "Сервіс тимчасово недоступний. Спробуйте пізніше."
+msgstr "Internal server error. Please try later."
+
+#: accounts/static/accounts/js/postActions.js:41
+#: accounts/static/accounts/js/profile.js:114
+#: accounts/static/accounts/js/profile.js:166
+#: accounts/static/accounts/js/profile.js:314
+msgid "Помилка мережі"
+msgstr "Network error"
 
 #: accounts/static/accounts/js/profile.js:66
 msgid "Nickname не може бути порожнім"
@@ -30,29 +38,20 @@ msgstr "Nickname cannot be empty"
 msgid "Email не може бути порожнім"
 msgstr "Email cannot be empty"
 
-#: accounts/static/accounts/js/profile.js:65
-msgid "username"
-msgstr "username"
-
 #: accounts/static/accounts/js/profile.js:100
 msgid "Збережено"
 msgstr "Saved"
 
-#: accounts/static/accounts/js/profile.js:108
+#: accounts/static/accounts/js/profile.js:106
 msgid "Не вдалося зберегти зміни"
 msgstr "Failed to save changes"
 
-#: accounts/static/accounts/js/profile.js:118
-#: accounts/static/accounts/js/profile.js:169
-#: accounts/static/accounts/js/profile.js:320
-msgid "Помилка мережі"
-msgstr "Network error"
-
-#: accounts/static/accounts/js/profile.js:160
+#: accounts/static/accounts/js/profile.js:156
 msgid "Поле очищено"
 msgstr "Field cleared"
 
-#: accounts/static/accounts/js/profile.js:164
+#: accounts/static/accounts/js/profile.js:159
+#: accounts/static/accounts/js/profile.js:311
 msgid "Щось пішло не так"
 msgstr "Something went wrong"
 

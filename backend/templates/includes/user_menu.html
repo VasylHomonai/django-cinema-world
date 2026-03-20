@@ -10,8 +10,8 @@
         </span>
     </button>
     <ul class="user-menu">
-        <li><a href="{% url 'account:profile' %}">{% trans "Профіль" %}</a></li>
-        <li><a href="{% url 'account:orders' %}">{% trans "Мої замовлення" %}</a></li>
+        <li><a href="{% url 'account:profile' %}" class="profile-btn">{% trans "Профіль" %}</a></li>
+        <li><a href="{% url 'account:orders' %}" class="orders-btn">{% trans "Мої замовлення" %}</a></li>
         <li><form method="post" action="{% url 'account_api:logout' %}" class="logout-form">
             {% csrf_token %}
             <button type="submit">{% trans "Вийти" %}</button>

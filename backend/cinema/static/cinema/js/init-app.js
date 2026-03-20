@@ -20,7 +20,7 @@ export function setupFloatingLabels() {
 /* Реалізація лейб для імпутних полів імені та телефону у попапі "Покупка фільму"
 Функція оновлює клас "not-empty" в залежності від вмісту  */
 function toggleLabel(input) {
-  if (input.value.trim() !== "") {
+  if (input.value !== "") {
     input.classList.add("not-empty");
   } else {
     input.classList.remove("not-empty");
