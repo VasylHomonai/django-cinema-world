@@ -4,6 +4,9 @@ FROM python:3.12.9-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Django settings для dev
+ENV DJANGO_SETTINGS_MODULE=config.settings.dev
+
 # Робоча директорія для самого додатку
 WORKDIR /usr/src/cinema-world
 
